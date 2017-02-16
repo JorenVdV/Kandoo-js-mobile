@@ -3,11 +3,15 @@
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
   "private": true,
+    "engine": {
+    "node": "7.5.0"
+  },
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "ionic:serve": "ionic-app-scripts serve",
+    "start" : "ionic-app-scripts serve"
   },
   "dependencies": {
     "@angular/common": "2.2.1",

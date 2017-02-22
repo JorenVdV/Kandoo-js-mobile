@@ -21272,3 +21272,34 @@ sub {
     padding-top: calc(16px + 20px);
   }
 }
+
+page-login .login-content .logo-row {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+page-login .login-content .login-box {
+  padding: 20px 20px 0px 20px;
+  margin-top: 30px;
+}
+
+page-login .login-content ion-row {
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+}
+
+page-login .login-content .signup-col {
+  margin: 0px 16px 0px 16px;
+  padding-bottom: 20px;
+}
+
+page-login .login-content .item-inner {
+  border-bottom-color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+page-login .login-content .register-btn {
+  font-size: 0.8em;
+}

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { UserService } from '../../providers/user.service';
 import { AuthService } from '../../providers/auth-service';
+import { LoginPage } from '../login/login';
 
 /*
   Generated class for the Register page.
@@ -18,14 +21,28 @@ export class RegisterPage {
     firstname: '',
     lastname: '', 
     organisation: '',
-    email: '', 
+    emailAddress: '', 
     password: ''
   };
 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController) {}
+  constructor(private nav: NavController, private authService: AuthService, private alertCtrl: AlertController) {}
+
 
   public register() {
-    this.auth.register(this.registerCredentials).subscribe(success => {
+    this.authService.register(this.registerCredentials)
+    .map(response => {
+      if(response.status === 201){return response;}
+    })
+      .subscribe(       
+        response => {
+          this.showPopup("Success", "Account created.");
+          this.nav.popTo(LoginPage)
+        }, error => {
+          this.showPopup("Error", "Problem creating account.");
+        }
+      );
+    
+    /*this.auth.register(this.registerCredentials).subscribe(success => {
       if (success) {
         this.createSuccess = true;
           this.showPopup("Success", "Account created.");
@@ -35,7 +52,7 @@ export class RegisterPage {
     },
     error => {
       this.showPopup("Error", error);
-    });
+    });*/
   }
  
   showPopup(title, text) {

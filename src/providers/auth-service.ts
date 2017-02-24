@@ -14,21 +14,49 @@ import {User} from '../models/user';
 
 @Injectable()
 export class AuthService {
-  currentUser: User;
+  currentUser: any;
 
   constructor(private http: Http ) {}
+
+
+  /*
+  login(emailAddress: string, password: string) {
+    return this.http.post('http://api.teamjs.xyz/login', JSON.stringify({
+      emailAddress: emailAddress,
+      password: password
+    }))
+      .map((response: Response) => {
+        // login successful if there's a jwt token in the response
+        console.log(response);
+        let user = response.json();
+        if (user && user.token) {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem('currentUser', JSON.stringify(user));
+        }
+      });
+  }
+
+  logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('currentUser');
+  }
+
+  */
+
 
   public login(credentials){
     if( credentials.email == null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
-      return Observable.create(observer => {
-        // At this point make a request to your backend to make a real check!
-        let access = (credentials.password === "pass" && credentials.email === "email");
-        //this.currentUser = new User('Simon', 'saimon@devdactic.com');
-        observer.next(access);
-        observer.complete();
-      });
+      return this.http.post('http://api.teamjs.xyz/login',
+      JSON.stringify({
+        emailAddress: credentials.email,
+        password: credentials.password
+      })).map((response:Response) => {
+        console.log(response);
+        this.currentUser = response.json();
+        console.log(this.currentUser);
+      })
     }
   }
 

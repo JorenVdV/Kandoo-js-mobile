@@ -27,21 +27,31 @@ export class LoginPage {
     this.nav.push(RegisterPage);
   }
 
+  /*
+   .subscribe(
+        data => {
+          this.router.navigate([this.returnUrl]);
+        },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        });
+
+  */
+
   public login() {
     this.showLoading()
-    this.auth.login(this.registerCredentials).subscribe(allowed => {
-      if (allowed) {
-        setTimeout(() => {
-        this.loading.dismiss();
-        this.nav.setRoot(HomePage)
+    this.auth.login(this.registerCredentials).subscribe(
+      data => {
+        //TODO return to page
+          setTimeout(() => {
+            this.loading.dismiss();
+            this.nav.setRoot(HomePage)
+          });
+        },
+        error => {
+          this.showError(error);
         });
-      } else {
-        this.showError("Access Denied");
-      }
-    },
-    error => {
-      this.showError(error);
-    });
   }
 
   showLoading() {

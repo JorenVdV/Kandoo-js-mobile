@@ -15,63 +15,29 @@ import {User} from '../models/user';
 @Injectable()
 export class AuthService {
   currentUser: any;
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http ) {}
-
-
-  /*
-  login(emailAddress: string, password: string) {
-    return this.http.post('http://api.teamjs.xyz/login', JSON.stringify({
-      emailAddress: emailAddress,
-      password: password
-    }))
-      .map((response: Response) => {
-        // login successful if there's a jwt token in the response
-        console.log(response);
-        let user = response.json();
-        if (user && user.token) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
-        }
-      });
-  }
-
-  logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-  }
-
-  */
-
 
   public login(credentials){
     if( credentials.email == null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
-      return this.http.post('http://api.teamjs.xyz/login',
+      return this.http.post('https://api.teamjs.xyz/login',
       JSON.stringify({
         emailAddress: credentials.email,
         password: credentials.password
-      })).map((response:Response) => {
-        console.log(response);
-        this.currentUser = response.json();
-        console.log(this.currentUser);
+      }), {headers: this.headers})
+        .map((response:Response) => {
+          //console.log(response);
+          this.currentUser = response.json();
+          //console.log(this.currentUser);
       })
     }
   }
 
-  public register(user:User) {
+  public register(user:any) {
     return this.http.post('http://api.teamjs.xyz/register', user, this.jwt());
-    /*
-    if (credentials.email === null || credentials.password === null) {
-      return Observable.throw("Please insert credentials");
-    } else {
-      // At this point store the credentials to your backend!
-      return Observable.create(observer => {
-        observer.next(true);
-        observer.complete();
-      });
-    }*/
   }
 
   public getUserInfo() : User {
@@ -84,6 +50,10 @@ export class AuthService {
       observer.next(true);
       observer.complete();
     });
+  }
+
+  public LoggedIn(){
+    return this.currentUser!=null;
   }
 
   private jwt() {

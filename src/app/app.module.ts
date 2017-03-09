@@ -6,6 +6,9 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { AuthService } from '../providers/auth-service';
 import {ChangeAccountDetailsPage} from '../pages/change-account-details/change-account-details';
+import { AccountDetailsPage } from '../pages/account-details/account-details';
+
+
 
 @NgModule({
   declarations: [
@@ -13,6 +16,7 @@ import {ChangeAccountDetailsPage} from '../pages/change-account-details/change-a
     HomePage,
     LoginPage,
     RegisterPage,
+    AccountDetailsPage,
     ChangeAccountDetailsPage
   ],
   imports: [
@@ -24,6 +28,7 @@ import {ChangeAccountDetailsPage} from '../pages/change-account-details/change-a
     HomePage,
     LoginPage,
     RegisterPage,
+    AccountDetailsPage,
     ChangeAccountDetailsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService]

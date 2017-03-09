@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -40,29 +40,40 @@ export class AuthService {
     return this.http.post('https://api.teamjs.xyz/register', user, this.jwt());
   }
 
-  public getUserInfo() : User {
-    return this.currentUser;
-  }
- 
-  public logout() {
-    return Observable.create(observer => {
-      this.currentUser = null;
-      observer.next(true);
-      observer.complete();
-    });
-  }
+    public getUserInfo():User {
+        return this.currentUser;
+    }
 
-  public LoggedIn(){
-    return this.currentUser!=null;
-  }
+    public logout() {
+        return Observable.create(observer => {
+            this.currentUser = null;
+            observer.next(true);
+            observer.complete();
+        });
+    }
 
-  private jwt() {
+    public LoggedIn() {
+        return this.currentUser != null;
+    }
+
+    private jwt() {
         // create authorization header with jwt token
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {
-            let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
-            return new RequestOptions({ headers: headers });
+            let headers = new Headers({'Authorization': 'Bearer ' + currentUser.token});
+            return new RequestOptions({headers: headers});
         }
     }
 
+    public changePassword(oldPassword, newPassword) {
+        this.currentUser.password = newPassword;
+        return this.http.put(`https://api.teamjs.xyz/user/${this.currentUser._id}/update`,
+            JSON.stringify({
+                password: newPassword,
+                originalPassword: oldPassword
+            }), {headers: this.headers})
+            .map((response:Response) => {
+                this.currentUser = response.json();
+            })
+    }
 }

@@ -30,7 +30,7 @@ export class AuthService {
       }), {headers: this.headers})
         .map((response:Response) => {
           //console.log(response);
-          this.currentUser = response.json();
+          this.currentUser = response.json().user;
           //console.log(this.currentUser);
       })
     }

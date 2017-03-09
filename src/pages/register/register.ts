@@ -36,7 +36,7 @@ export class RegisterPage {
       .subscribe(       
         response => {
           this.showPopup("Success", "Account created.");
-          this.nav.popTo(LoginPage)
+          this.nav.popToRoot();
         }, error => {
           this.showPopup("Error", "Problem creating account.");
         }

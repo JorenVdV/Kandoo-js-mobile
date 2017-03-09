@@ -15,7 +15,7 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public auths: AuthService) {
-      if(this.auths.LoggedIn){
+      if(this.auths.LoggedIn()){
         this.navCtrl.setRoot(OverviewPage);
       }
   }

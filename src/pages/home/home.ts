@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { LoginPage } from '../login/login';
-import { AccountDetailsPage } from '../account-details/account-details';
+import { RegisterPage } from '../register/register';
+import { OverviewPage } from '../overview/overview';
 
 @Component({
   selector: 'page-home',
@@ -11,16 +12,22 @@ import { AccountDetailsPage } from '../account-details/account-details';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController,public auths: AuthService) {
-
+  constructor(
+    public navCtrl: NavController,
+    public auths: AuthService) {
+      if(this.auths.LoggedIn){
+        this.navCtrl.setRoot(OverviewPage);
+      }
   }
 
-  openAccount(){
-    if(this.auths.LoggedIn()){
-      this.navCtrl.setRoot(AccountDetailsPage);
-    }else{
-      this.navCtrl.setRoot(LoginPage);
-    }
+  private login(){
+    this.navCtrl.push(LoginPage);
   }
+
+  private register() {
+    this.navCtrl.push(RegisterPage);
+  }
+
+  
 
 }

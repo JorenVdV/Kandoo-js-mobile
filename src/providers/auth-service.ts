@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   public register(user:any) {
-    return this.http.post('http://api.teamjs.xyz/register', user, this.jwt());
+    return this.http.post('https://api.teamjs.xyz/register', user, this.jwt());
   }
 
   public getUserInfo() : User {

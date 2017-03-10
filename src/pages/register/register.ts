@@ -4,6 +4,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { UserService } from '../../providers/user.service';
 import { AuthService } from '../../providers/auth-service';
 import { LoginPage } from '../login/login';
+import {User} from "../../models/user";
 
 /*
   Generated class for the Register page.

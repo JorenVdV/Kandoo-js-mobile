@@ -76,4 +76,12 @@ export class AuthService {
                 this.currentUser = response.json();
             })
     }
+
+    updateUser(user:User) {
+        return this.http.put(`https://api.teamjs.xyz/user/${this.currentUser._id}/update`,
+            JSON.stringify(user), {headers: this.headers})
+            .map((response:Response) => {
+                this.currentUser = response.json();
+            })
+    }
 }

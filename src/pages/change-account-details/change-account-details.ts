@@ -4,6 +4,7 @@ import {AuthService} from "../../providers/auth-service";
 import {LoginPage} from "../login/login";
 import {HomePage} from "../home/home";
 import {AccountDetailsPage} from "../account-details/account-details";
+import {User} from "../../models/user";
 
 /*
  Generated class for the ChangeAccountDetails page.
@@ -16,6 +17,8 @@ import {AccountDetailsPage} from "../account-details/account-details";
   templateUrl: 'change-account-details.html'
 })
 export class ChangeAccountDetailsPage {
+  private user: User;
+  private lastUpdatedUser: User;
 
 
   constructor(public navCtrl:NavController, public navParams:NavParams, private auth:AuthService) {
@@ -26,8 +29,21 @@ export class ChangeAccountDetailsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChangeAccountDetailsPage');
+    this.user = this.auth.getUserInfo();
+    this.lastUpdatedUser = this.user;
   }
 
-  
-
+  saveChanges() {
+    if(this.user === this.lastUpdatedUser){
+      //juiste manier?
+      
+    }
+    else {
+      this.auth.updateUser(this.user).subscribe(
+          data => {
+            this.navCtrl.setRoot(AccountDetailsPage)
+          },
+          err => console.log(err));
+    }
+  }
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { AccountDetailsPage } from '../account-details/account-details';
+
 /*
   Generated class for the Overview page.
 
@@ -17,6 +19,10 @@ export class OverviewPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OverviewPage');
+  }
+
+  private openAccount(){
+    this.navCtrl.push(AccountDetailsPage);
   }
 
 }

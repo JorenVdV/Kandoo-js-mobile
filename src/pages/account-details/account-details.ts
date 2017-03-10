@@ -6,6 +6,7 @@ import { ChangeAccountDetailsPage } from '../change-account-details/change-accou
 import { LoginPage } from '../login/login';
 
 import { User } from '../../models/user';
+import {HomePage} from "../home/home";
 /*
   Generated class for the AccountDetails page.
 
@@ -37,6 +38,15 @@ export class AccountDetailsPage {
 
   public Edit(){
     this.navCtrl.setRoot(ChangeAccountDetailsPage)
+  }
+
+  public logOut(){
+    this.auths.logout().subscribe(
+        data => {
+          this.navCtrl.setRoot(HomePage)
+        },
+        err => console.log(err)
+    )
   }
 
 }

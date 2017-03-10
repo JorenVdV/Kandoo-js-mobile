@@ -13,37 +13,29 @@ import {User} from "../../models/user";
  Ionic pages and navigation.
  */
 @Component({
-  selector: 'page-change-account-details',
-  templateUrl: 'change-account-details.html'
+    selector: 'page-change-account-details',
+    templateUrl: 'change-account-details.html'
 })
 export class ChangeAccountDetailsPage {
-  private user: User;
-  private lastUpdatedUser: User;
-
-
-  constructor(public navCtrl:NavController, public navParams:NavParams, private auth:AuthService) {
-    if (!this.auth.LoggedIn()){
-      this.navCtrl.setRoot(LoginPage);
+    private user = new User;
+    
+    constructor(public navCtrl:NavController, public navParams:NavParams, private auth:AuthService) {
+        if (!this.auth.LoggedIn()) {
+            this.navCtrl.setRoot(LoginPage);
+        }
     }
-  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChangeAccountDetailsPage');
-    this.user = this.auth.getUserInfo();
-    this.lastUpdatedUser = this.user;
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad ChangeAccountDetailsPage');
+        this.user = this.auth.getUserInfo();
+    }
 
-  saveChanges() {
-    if(this.user === this.lastUpdatedUser){
-      //juiste manier?
-      
+    saveChanges() {
+        //check if model changed
+        this.auth.updateUser(this.user).subscribe(
+            data => {
+                this.navCtrl.setRoot(AccountDetailsPage)
+            },
+            err => console.log(err));
     }
-    else {
-      this.auth.updateUser(this.user).subscribe(
-          data => {
-            this.navCtrl.setRoot(AccountDetailsPage)
-          },
-          err => console.log(err));
-    }
-  }
 }

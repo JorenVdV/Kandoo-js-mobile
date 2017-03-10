@@ -19,19 +19,23 @@
       <ion-col>
         <ion-list inset>
           <ion-item>
-            <ion-input type="text" placeholder="First Name" name=firstname [(ngModel)]="user.firstname" required></ion-input>
+            <ion-label floating>Firstname</ion-label>
+            <ion-input type="text" name=firstname [(ngModel)]="user.firstname" required></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input type="text" placeholder="Last Name" name=lastname [(ngModel)]="user.lastname" required></ion-input>
+            <ion-label floating>Lastname</ion-label>
+            <ion-input type="text" name=lastname [(ngModel)]="user.lastname" required></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input type="text" placeholder="Organisation" name=organisation [(ngModel)]="user.organisation"></ion-input>
+            <ion-label floating>Organisation</ion-label>
+            <ion-input type="text" name=organisation [(ngModel)]="user.organisation"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input type="email" placeholder="Email" name="emailAddress" [(ngModel)]="user.emailAddress" required></ion-input>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="email" name="emailAddress" [(ngModel)]="user.emailAddress" required></ion-input>
           </ion-item>
 
         </ion-list>

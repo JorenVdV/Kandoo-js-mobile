@@ -31,7 +31,7 @@ export class AuthService {
       }), {headers: this.headers})
         .map((response:Response) => {
           //console.log(response);
-          this.currentUser = response.json();
+          this.currentUser = response.json().user;
           //console.log(this.currentUser);
       })
     }
@@ -73,6 +73,14 @@ export class AuthService {
                 password: newPassword,
                 originalPassword: oldPassword
             }), {headers: this.headers})
+            .map((response:Response) => {
+                this.currentUser = response.json();
+            })
+    }
+
+    updateUser(user:User) {
+        return this.http.put(this.urlService.getURL(`user/${this.currentUser._id}/update`),
+            JSON.stringify(user), {headers: this.headers})
             .map((response:Response) => {
                 this.currentUser = response.json();
             })

@@ -8,6 +8,7 @@ import { RegisterPage } from '../pages/register/register';
 import { AccountDetailsPage } from '../pages/account-details/account-details';
 import { ChangeAccountDetailsPage } from '../pages/change-account-details/change-account-details'
 import { OverviewPage } from '../pages/overview/overview';
+import {ChangeAccountPasswordPage} from "../pages/change-account-password/change-account-password";
 
 @Component({
   templateUrl: 'app.html'
@@ -27,7 +28,8 @@ export class MyApp {
       { title: 'Overview', component:  OverviewPage},
       { title: 'Login', component: LoginPage },
       { title: 'Account', component: ChangeAccountDetailsPage},
-      { title: 'AccountDetails', component: AccountDetailsPage}
+      { title: 'AccountDetails', component: AccountDetailsPage},
+      { title: 'ChangePassword', component: ChangeAccountPasswordPage}
       //{ title: 'Register', component: RegisterPage }
     ];
 

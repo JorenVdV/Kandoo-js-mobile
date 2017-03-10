@@ -4,6 +4,7 @@ import {AuthService} from "../../providers/auth-service";
 import {LoginPage} from "../login/login";
 import {HomePage} from "../home/home";
 import {AccountDetailsPage} from "../account-details/account-details";
+import {User} from "../../models/user";
 
 /*
  Generated class for the ChangeAccountDetails page.
@@ -12,32 +13,29 @@ import {AccountDetailsPage} from "../account-details/account-details";
  Ionic pages and navigation.
  */
 @Component({
-  selector: 'page-change-account-details',
-  templateUrl: 'change-account-details.html'
+    selector: 'page-change-account-details',
+    templateUrl: 'change-account-details.html'
 })
 export class ChangeAccountDetailsPage {
-  email:string;
-  oldPassword:string;
-  newPassword:string;
-
-  constructor(public navCtrl:NavController, public navParams:NavParams, private auth:AuthService) {
-    if (!this.auth.LoggedIn()){
-      this.navCtrl.setRoot(LoginPage);
+    private user = new User;
+    
+    constructor(public navCtrl:NavController, public navParams:NavParams, private auth:AuthService) {
+        if (!this.auth.LoggedIn()) {
+            this.navCtrl.setRoot(LoginPage);
+        }
     }
-  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChangeAccountDetailsPage');
-    this.email = this.auth.getUserInfo().emailAddress;
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad ChangeAccountDetailsPage');
+        this.user = this.auth.getUserInfo();
+    }
 
-  changePassword() {
-    this.auth.changePassword(this.oldPassword, this.newPassword).subscribe(
-        data => {
-          this.navCtrl.setRoot(AccountDetailsPage)
-        },
-        err => {console.log(err)}
-    );
-  }
-
+    saveChanges() {
+        //check if model changed
+        this.auth.updateUser(this.user).subscribe(
+            data => {
+                this.navCtrl.setRoot(AccountDetailsPage)
+            },
+            err => console.log(err));
+    }
 }

@@ -6,6 +6,8 @@ import { ChangeAccountDetailsPage } from '../change-account-details/change-accou
 import { LoginPage } from '../login/login';
 
 import { User } from '../../models/user';
+import {HomePage} from "../home/home";
+import {ChangeAccountPasswordPage} from "../change-account-password/change-account-password";
 /*
   Generated class for the AccountDetails page.
 
@@ -18,7 +20,7 @@ import { User } from '../../models/user';
   templateUrl: 'account-details.html'
 })
 export class AccountDetailsPage {
-  public user : User;
+  public user = new User;
 
   constructor(
     public navCtrl: NavController,
@@ -33,10 +35,24 @@ export class AccountDetailsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccountDetailsPage');
+    this.user = this.auths.getUserInfo();
   }
 
   public Edit(){
     this.navCtrl.setRoot(ChangeAccountDetailsPage)
+  }
+
+  public LogOut(){
+    this.auths.logout().subscribe(
+        data => {
+          this.navCtrl.setRoot(HomePage)
+        },
+        err => console.log(err)
+    )
+  }
+
+  public ChangePass(){
+    this.navCtrl.setRoot(ChangeAccountPasswordPage)
   }
 
 }

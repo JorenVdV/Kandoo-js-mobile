@@ -13,36 +13,41 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-  <div class="login-box">
-    <form (ngSubmit)="changePassword()" #registerForm="ngForm">
-      <ion-row>
-        <ion-col>
-          <ion-list inset>
+  <form (ngSubmit)="saveChanges()" #registerForm="ngForm">
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+          <ion-item>
+            <ion-label floating>Firstname</ion-label>
+            <ion-input type="text" name=firstname [(ngModel)]="user.firstname" required></ion-input>
+          </ion-item>
 
-            <ion-item>
-              <ion-input type="email" placeholder="Email" name="email" [(ngModel)]="email" required></ion-input>
-            </ion-item>
+          <ion-item>
+            <ion-label floating>Lastname</ion-label>
+            <ion-input type="text" name=lastname [(ngModel)]="user.lastname" required></ion-input>
+          </ion-item>
 
-            <ion-item>
-              <ion-input type="password" placeholder="OldPassword" name="oldpassword" [(ngModel)]="oldPassword" required></ion-input>
-            </ion-item>
+          <ion-item>
+            <ion-label floating>Organisation</ion-label>
+            <ion-input type="text" name=organisation [(ngModel)]="user.organisation"></ion-input>
+          </ion-item>
 
-            <ion-item>
-              <ion-input type="password" placeholder="NewPassword" name="newpassword" [(ngModel)]="newPassword" required></ion-input>
-            </ion-item>
+          <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="email" name="emailAddress" [(ngModel)]="user.emailAddress" required></ion-input>
+          </ion-item>
 
-          </ion-list>
-        </ion-col>
-      </ion-row>
+        </ion-list>
+      </ion-col>
+    </ion-row>
 
-      <ion-row>
-        <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Change password</button>
-        </ion-col>
-      </ion-row>
+    <ion-row>
+      <ion-col class="signup-col">
+        <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Save changes</button>
+      </ion-col>
+    </ion-row>
 
-    </form>
-  </div>
+  </form>
 </ion-content>
+

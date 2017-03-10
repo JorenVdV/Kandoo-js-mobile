@@ -39,7 +39,7 @@ export class AccountDetailsPage {
   }
 
   public Edit(){
-    this.navCtrl.setRoot(ChangeAccountDetailsPage)
+    this.navCtrl.push(ChangeAccountDetailsPage)
   }
 
   public LogOut(){
@@ -52,7 +52,7 @@ export class AccountDetailsPage {
   }
 
   public ChangePass(){
-    this.navCtrl.setRoot(ChangeAccountPasswordPage)
+    this.navCtrl.push(ChangeAccountPasswordPage)
   }
 
 }

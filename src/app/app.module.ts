@@ -24,7 +24,7 @@ import { UserService } from '../providers/user-service';
     OverviewPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{tabsPlacement:'bottom'})
   ],
   bootstrap: [IonicApp],
   entryComponents: [

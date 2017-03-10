@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class URL {
+export class URLProvider {
   private url:string = "https://kandoo-js-backend.herokuapp.com/";
 
   constructor(public http: Http) {

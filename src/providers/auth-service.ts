@@ -3,7 +3,8 @@ import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import {User} from '../models/user';
+import { User } from '../models/user';
+import { URLService } from '../providers/url-service';
 
 /*
   Generated class for the AuthService provider.
@@ -17,13 +18,13 @@ export class AuthService {
   currentUser: any;
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http ) {}
+  constructor(private http: Http, private urlService: URLService) {}
 
   public login(credentials){
     if( credentials.email == null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
-      return this.http.post('https://api.teamjs.xyz/login',
+      return this.http.post(this.urlService.getURL('login'),
       JSON.stringify({
         emailAddress: credentials.email,
         password: credentials.password
@@ -37,7 +38,7 @@ export class AuthService {
   }
 
   public register(user:any) {
-    return this.http.post('https://api.teamjs.xyz/register', user, this.jwt());
+    return this.http.post(this.urlService.getURL('register'), user, this.jwt());
   }
 
     public getUserInfo():User {
@@ -67,7 +68,7 @@ export class AuthService {
 
     public changePassword(oldPassword, newPassword) {
         this.currentUser.password = newPassword;
-        return this.http.put(`https://api.teamjs.xyz/user/${this.currentUser._id}/update`,
+        return this.http.put(this.urlService.getURL(`user/${this.currentUser._id}/update`),
             JSON.stringify({
                 password: newPassword,
                 originalPassword: oldPassword

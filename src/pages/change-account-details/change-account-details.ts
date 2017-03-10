@@ -16,9 +16,7 @@ import {AccountDetailsPage} from "../account-details/account-details";
   templateUrl: 'change-account-details.html'
 })
 export class ChangeAccountDetailsPage {
-  email:string;
-  oldPassword:string;
-  newPassword:string;
+
 
   constructor(public navCtrl:NavController, public navParams:NavParams, private auth:AuthService) {
     if (!this.auth.LoggedIn()){
@@ -28,16 +26,8 @@ export class ChangeAccountDetailsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChangeAccountDetailsPage');
-    this.email = this.auth.getUserInfo().emailAddress;
   }
 
-  changePassword() {
-    this.auth.changePassword(this.oldPassword, this.newPassword).subscribe(
-        data => {
-          this.navCtrl.setRoot(AccountDetailsPage)
-        },
-        err => {console.log(err)}
-    );
-  }
+  
 
 }

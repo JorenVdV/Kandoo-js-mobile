@@ -8,6 +8,7 @@ import { AuthService } from '../providers/auth-service';
 import { ChangeAccountDetailsPage } from '../pages/change-account-details/change-account-details';
 import { AccountDetailsPage } from '../pages/account-details/account-details';
 import { OverviewPage } from '../pages/overview/overview';
+import {ChangeAccountPasswordPage} from "../pages/change-account-password/change-account-password";
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { OverviewPage } from '../pages/overview/overview';
     RegisterPage,
     AccountDetailsPage,
     ChangeAccountDetailsPage,
+    ChangeAccountPasswordPage,
     OverviewPage
   ],
   imports: [
@@ -31,6 +33,7 @@ import { OverviewPage } from '../pages/overview/overview';
     RegisterPage,
     AccountDetailsPage,
     ChangeAccountDetailsPage,
+    ChangeAccountPasswordPage,
     OverviewPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService]

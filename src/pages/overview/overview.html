@@ -20,8 +20,7 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-tabs tabsPlacement="botom">
-    <ion-tab tabTitle="Dash" tabIcon="pulse" [root]="tabRoot"></ion-tab>
-  </ion-tabs>
-</ion-content>
+<ion-tabs>
+  <ion-tab [root]="tab1Root" tabTitle="Themes" tabIcon="pulse"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Sessions" tabIcon="chatbubbles"></ion-tab>
+</ion-tabs>

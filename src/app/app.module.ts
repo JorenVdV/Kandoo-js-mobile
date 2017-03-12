@@ -8,6 +8,8 @@ import { ChangeAccountDetailsPage } from '../pages/change-account-details/change
 import { AccountDetailsPage } from '../pages/account-details/account-details';
 import { OverviewPage } from '../pages/overview/overview';
 import {ChangeAccountPasswordPage} from "../pages/change-account-password/change-account-password";
+import { SessionPage } from '../pages/session/session';
+import { ThemePage } from '../pages/theme/theme';
 
 import { AuthService } from '../providers/auth-service';
 import { URLService } from '../providers/url-service';
@@ -23,7 +25,9 @@ import { UserService } from '../providers/user-service';
     AccountDetailsPage,
     ChangeAccountDetailsPage,
     ChangeAccountPasswordPage,
-    OverviewPage
+    OverviewPage,
+    SessionPage,
+    ThemePage
   ],
   imports: [
     IonicModule.forRoot(MyApp,{tabsPlacement:'bottom'})
@@ -37,7 +41,9 @@ import { UserService } from '../providers/user-service';
     AccountDetailsPage,
     ChangeAccountDetailsPage,
     ChangeAccountPasswordPage,
-    OverviewPage
+    OverviewPage,
+    SessionPage,
+    ThemePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, URLService, UserService]
 })

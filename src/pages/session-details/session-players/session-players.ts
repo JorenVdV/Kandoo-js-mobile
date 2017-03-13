@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {Session} from "../../../models/session";
+import {User} from "../../../models/user";
 
 /*
   Generated class for the SessionPlayers page.
@@ -11,12 +13,14 @@ import { NavController, NavParams } from 'ionic-angular';
   selector: 'page-session-players',
   templateUrl: 'session-players.html'
 })
-export class SessionPlayersPage {
+export class PlayersPage {
+  private players : User[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SessionPlayersPage');
+    this.players = this.navParams.data;
   }
 
 }

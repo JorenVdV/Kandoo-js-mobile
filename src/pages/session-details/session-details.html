@@ -12,7 +12,21 @@
 
 </ion-header>
 
-
-<ion-content padding>
-
-</ion-content>
+<ion-tabs>
+  <ion-tab [root]="gameRoot"
+           [rootParams]="session"
+           tabTitle="Game"
+           tabIcon="ios-disc"></ion-tab>
+  <ion-tab [root]="informationRoot"
+           [rootParams]="session"
+           tabTitle="details"
+           tabIcon="information-circle"></ion-tab>
+  <ion-tab [root]="gameRoot"
+           [rootParams]="session"
+           tabTitle="Game"
+           tabIcon="ios-disc"></ion-tab>
+  <ion-tab [root]="playersRoot"
+           [rootParams]="session.participants"
+           tabTitle="Players"
+           tabIcon="people"></ion-tab>
+</ion-tabs>

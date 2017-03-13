@@ -14,6 +14,11 @@ import { ThemePage } from '../pages/theme/theme';
 import { AuthService } from '../providers/auth-service';
 import { URLService } from '../providers/url-service';
 import { UserService } from '../providers/user-service';
+import {SessionDetailsPage} from "../pages/session-details/session-details";
+import {GamePage} from "../pages/session-details/game/game";
+import {PlayersPage} from "../pages/session-details/session-players/session-players";
+import {SessionService} from "../providers/session-service";
+import {SessionInformationPage} from "../pages/session-details/session-information/session-information";
 
 
 @NgModule({
@@ -27,6 +32,10 @@ import { UserService } from '../providers/user-service';
     ChangeAccountPasswordPage,
     OverviewPage,
     SessionPage,
+    SessionDetailsPage,
+    GamePage,
+    PlayersPage,
+    SessionInformationPage,
     ThemePage
   ],
   imports: [
@@ -43,8 +52,12 @@ import { UserService } from '../providers/user-service';
     ChangeAccountPasswordPage,
     OverviewPage,
     SessionPage,
+    SessionDetailsPage,
+    GamePage,
+    PlayersPage,
+    SessionInformationPage,
     ThemePage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, URLService, UserService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, URLService, UserService, SessionService]
 })
 export class AppModule {}

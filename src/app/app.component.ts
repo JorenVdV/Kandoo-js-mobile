@@ -11,6 +11,7 @@ import { OverviewPage } from '../pages/overview/overview';
 import { ChangeAccountPasswordPage} from "../pages/change-account-password/change-account-password";
 import { SessionPage } from '../pages/session/session';
 import { ThemePage } from '../pages/theme/theme';
+import {SessionDetailsPage} from "../pages/session-details/session-details";
 
 @Component({
   templateUrl: 'app.html'
@@ -31,7 +32,7 @@ export class MyApp {
       { title: 'Login', component: LoginPage },
       { title: 'Account', component: ChangeAccountDetailsPage},
       { title: 'AccountDetails', component: AccountDetailsPage},
-      { title: 'ChangePassword', component: ChangeAccountPasswordPage}
+      { title: 'SessionDetails', component: SessionDetailsPage}
       //{ title: 'Register', component: RegisterPage }
     ];
 

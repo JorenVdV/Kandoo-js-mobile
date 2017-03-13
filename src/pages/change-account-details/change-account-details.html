@@ -38,6 +38,11 @@
             <ion-input type="email" name="emailAddress" [(ngModel)]="user.emailAddress" required></ion-input>
           </ion-item>
 
+          <ion-item>
+            <ion-label>Notifications</ion-label>
+            <ion-toggle color="secondary" checked="user.mobileNotifications"></ion-toggle>
+          </ion-item>
+
         </ion-list>
       </ion-col>
     </ion-row>

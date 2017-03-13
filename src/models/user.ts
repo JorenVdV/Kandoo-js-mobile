@@ -4,4 +4,5 @@
     organisation: string;
     emailAddress: string;
     settings : string;
+    mobileNotifications: boolean;
 }

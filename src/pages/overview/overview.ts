@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { AccountDetailsPage } from '../account-details/account-details';
+import { SessionPage } from '../session/session';
+import { ThemePage } from '../theme/theme';
 
 /*
   Generated class for the Overview page.
@@ -14,6 +16,9 @@ import { AccountDetailsPage } from '../account-details/account-details';
   templateUrl: 'overview.html'
 })
 export class OverviewPage {
+
+  tab1Root: any = ThemePage;
+  tab2Root: any = SessionPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 

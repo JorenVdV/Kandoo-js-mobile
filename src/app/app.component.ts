@@ -8,7 +8,9 @@ import { RegisterPage } from '../pages/register/register';
 import { AccountDetailsPage } from '../pages/account-details/account-details';
 import { ChangeAccountDetailsPage } from '../pages/change-account-details/change-account-details'
 import { OverviewPage } from '../pages/overview/overview';
-import {ChangeAccountPasswordPage} from "../pages/change-account-password/change-account-password";
+import { ChangeAccountPasswordPage} from "../pages/change-account-password/change-account-password";
+import { SessionPage } from '../pages/session/session';
+import { ThemePage } from '../pages/theme/theme';
 
 @Component({
   templateUrl: 'app.html'

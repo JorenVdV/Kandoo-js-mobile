@@ -1,10 +1,10 @@
-import {User} from "./user";
-import {Card} from "./card";
 /**
- * Created by Seger on 13/03/2017.
+ * Created by Sander Van Camp on 20/02/2017.
  */
+import {Card} from "./card";
+import {User} from "./user";
+
 export class Session {
-    id: string;
     title: string;
     description: string;
     circleType: string;
@@ -21,4 +21,10 @@ export class Session {
     endDate: Date;
     amountOfCircles: number;
     turnDuration: number;
+    _id: string;
+    invitees: String [];
+    sessionCards: Card[];
+    pickedCards: Card[];
+
 }
+

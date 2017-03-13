@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import {Headers, Http} from "@angular/http";
 import 'rxjs/add/operator/map';
 
 /*
@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class URLService {
+  private headers = new Headers({'Content-Type': 'application/json'});
   private url:string = "https://kandoo-js-backend.herokuapp.com/";
 
   constructor(public http: Http) {
@@ -18,6 +19,10 @@ export class URLService {
 
   public getURL(appendix:string){
     return this.url+appendix;
+  }
+
+  public getHeaders(){
+    return this.headers;
   }
 
 }

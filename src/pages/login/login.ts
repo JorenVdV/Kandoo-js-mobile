@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
+import { SocketService } from '../../providers/socket-service';
+
 import { RegisterPage } from '../register/register';
 import { HomePage } from '../home/home';
 
@@ -20,38 +22,30 @@ export class LoginPage {
   loading: Loading;
   registerCredentials = {email: '', password: ''}
 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {}
+  constructor(private nav: NavController, 
+    private auth: AuthService, 
+    private alertCtrl: AlertController, 
+    private loadingCtrl: LoadingController,
+    private socketService: SocketService) {}
 
 
   public createAccount() {
     this.nav.push(RegisterPage);
   }
 
-  /*
-   .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          this.alertService.error(error);
-          this.loading = false;
-        });
-
-  */
-
   public login() {
     this.showLoading()
-    this.auth.login(this.registerCredentials).subscribe(
+    this.auth.login(this.registerCredentials.email, this.registerCredentials.password)
+    .subscribe(
       data => {
-        //TODO return to page
-          setTimeout(() => {
-            this.loading.dismiss();
-            this.nav.setRoot(HomePage)
-          });
-        },
-        error => {
-          this.showError(error);
+        setTimeout(() => {
+          this.loading.dismiss();
+          this.nav.setRoot(HomePage)
         });
+      },
+      error => {
+        this.showError(error);
+      });
   }
 
   showLoading() {

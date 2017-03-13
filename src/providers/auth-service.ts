@@ -20,21 +20,19 @@ export class AuthService {
 
   constructor(private http: Http, private urlService: URLService) {}
 
-  public login(credentials){
-    if( credentials.email == null || credentials.password === null) {
-      return Observable.throw("Please insert credentials");
-    } else {
-      return this.http.post(this.urlService.getURL('login'),
+  login(emailAddress: string, password: string) {
+    return this.http.post(this.urlService.getURL(`login`), 
       JSON.stringify({
-        emailAddress: credentials.email,
-        password: credentials.password
-      }), {headers: this.headers})
-        .map((response:Response) => {
-          //console.log(response);
-          this.currentUser = response.json().user;
-          //console.log(this.currentUser);
-      })
-    }
+        emailAddress: emailAddress,
+        password: password
+      }), {headers: this.urlService.getHeaders()})
+    .map((response: Response) => {
+      let user = response.json().user;
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+      this.currentUser = user;
+      if (response.status == 200)
+        return response;
+      });
   }
 
   public register(user:any) {
@@ -76,6 +74,10 @@ export class AuthService {
             .map((response:Response) => {
                 this.currentUser = response.json();
             })
+    }
+
+    public getUserID(){
+        return this.currentUser._id;
     }
 
     updateUser(user:User) {

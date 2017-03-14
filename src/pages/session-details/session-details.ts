@@ -3,8 +3,8 @@ import {NavController, NavParams} from 'ionic-angular';
 import {GamePage} from "./game/game";
 import {PlayersPage} from "./session-players/session-players";
 import {Session} from "../../models/session";
-import {SessionService} from "../../providers/session-service";
 import {SessionInformationPage} from "./session-information/session-information";
+import {SessionProvider} from "../../providers/session-provider";
 
 /*
  Generated class for the SessionDetails page.
@@ -22,18 +22,13 @@ export class SessionDetailsPage {
     informationRoot:any = SessionInformationPage;
 
     session = new Session;
-    constructor(public navCtrl:NavController, public navParams:NavParams, public sessionService:SessionService) {
+    constructor(public navCtrl:NavController, public navParams:NavParams, public sessionProvider:SessionProvider) {
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad SessionDetailsPage');
-        this.sessionService.getSession().subscribe(
-            data => {
-                this.session = data.json().session;
-                console.log(this.session)
-            },
-            err => console.log(err)
-        )
+        console.log(this.navCtrl);
+        this.session = this.navParams.data;
     }
 
 }

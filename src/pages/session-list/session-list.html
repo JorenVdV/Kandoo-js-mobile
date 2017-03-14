@@ -16,9 +16,9 @@
 <ion-content padding>
   <ion-list>
     <ion-item-sliding *ngFor="let session of sessions">
-      <ion-item>{{session.title}}
+      <ion-item (click)="selectSession(session)">{{session.title}}
       </ion-item>
-      <ion-item-options side="right" (ionSwipe)="saveItem(item)">
+      <ion-item-options side="right" (ionSwipe)="selectSession(session)">
         <button ion-button expandable (click)="selectSession(session)" light> 
           <ion-icon name="paper"></ion-icon>
         </button>

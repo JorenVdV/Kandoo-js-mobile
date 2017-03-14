@@ -88,8 +88,8 @@ export class SessionProvider {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-
-
-
-
+    //todo remove this function
+    public getSession(){
+        return this.http.get(this.urlService.getURL(`session/58c11715d39fc40004d02569`));
+    }
 }

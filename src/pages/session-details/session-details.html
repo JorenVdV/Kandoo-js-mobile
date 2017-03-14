@@ -1,0 +1,32 @@
+<!--
+  Generated template for the SessionDetails page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>session-details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-tabs>
+  <ion-tab [root]="gameRoot"
+           [rootParams]="session"
+           tabTitle="Game"
+           tabIcon="ios-disc"></ion-tab>
+  <ion-tab [root]="informationRoot"
+           [rootParams]="session"
+           tabTitle="details"
+           tabIcon="information-circle"></ion-tab>
+  <ion-tab [root]="gameRoot"
+           [rootParams]="session"
+           tabTitle="Game"
+           tabIcon="ios-disc"></ion-tab>
+  <ion-tab [root]="playersRoot"
+           [rootParams]="session.participants"
+           tabTitle="Players"
+           tabIcon="people"></ion-tab>
+</ion-tabs>

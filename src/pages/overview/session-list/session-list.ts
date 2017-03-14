@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { App, NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams, App} from 'ionic-angular';
 
 import { SessionProvider } from '../../../providers/session-provider';
 import { Session } from '../../../models/session';
@@ -25,8 +25,8 @@ export class SessionListPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams, 
     private sessionprov:SessionProvider,
-    private appCtrl: App ) {
-      this.getSessions();
+   private appCtrl: App ) {
+     this.getSessions();
   }
 
   getSessions(): void {
@@ -44,8 +44,6 @@ export class SessionListPage {
   }
 
   selectSession(session:Session){
-    
-    this.navCtrl.push(SessionDetailPage, {session:Session});
-  }
-
+    this.appCtrl.getRootNav().push(SessionDetailPage, {session:Session});
+ }
 }

@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { AccountDetailsPage } from '../account-details/account-details';
-import { SessionListPage } from '../session-list/session-list';
-import { ThemeListPage } from '../theme-list/theme-list';
-import { InvitedSessionListPage } from '../invited-session-list/invited-session-list';
-
+import { SessionListPage } from './session-list/session-list';
+import { ThemeListPage } from './theme-list/theme-list';
+import { InvitedSessionListPage } from './invited-session-list/invited-session-list';
+import { SessionDetailPage } from '../session-detail/session-detail';
+import { Session } from '../../models/session';
 /*
   Generated class for the Overview page.
 
@@ -30,6 +31,10 @@ export class OverviewPage {
 
   private openAccount(){
     this.navCtrl.push(AccountDetailsPage);
+  }
+
+  openSessionRoot(session:Session){
+    this.navCtrl.push(SessionDetailPage, {session:Session})
   }
 
 }

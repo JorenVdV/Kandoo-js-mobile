@@ -8,9 +8,9 @@ import { ChangeAccountDetailsPage } from '../pages/change-account-details/change
 import { AccountDetailsPage } from '../pages/account-details/account-details';
 import { OverviewPage } from '../pages/overview/overview';
 import { ChangeAccountPasswordPage } from "../pages/change-account-password/change-account-password";
-import { SessionListPage } from '../pages/session-list/session-list';
-import { ThemeListPage } from '../pages/theme-list/theme-list';
-import { InvitedSessionListPage } from '../pages/invited-session-list/invited-session-list';
+import { SessionListPage } from '../pages/overview/session-list/session-list';
+import { ThemeListPage } from '../pages/overview/theme-list/theme-list';
+import { InvitedSessionListPage } from '../pages/overview/invited-session-list/invited-session-list';
 import { SessionDetailPage } from '../pages/session-detail/session-detail';
 
 import { AuthService } from '../providers/auth-service';

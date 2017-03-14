@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { Session } from '../../models/session';
+
 /*
   Generated class for the SessionDetail page.
 
@@ -12,6 +14,7 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'session-detail.html'
 })
 export class SessionDetailPage {
+  session : Session;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 

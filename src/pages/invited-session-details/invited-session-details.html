@@ -14,5 +14,7 @@
 
 
 <ion-content padding>
-
+  <h1> {{session.title}}</h1>
+  <p> {{session.description}} </p>
+  <button ion-button full (click)="acceptInvite()" class="submit-btn">Accept invite</button>
 </ion-content>

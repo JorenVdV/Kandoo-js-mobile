@@ -6,17 +6,33 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>session-information</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>session-information</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <h1>{{session.title}}</h1>
-  <p>{{session.description}}</p>
-  <ion-icon name="checkmark-circle" color="secondary"></ion-icon>
-  <!--status-->
+    <ion-list>
+        <ion-list-header>
+            <h1>{{session.title}}</h1>
+        </ion-list-header>
+
+        <ion-item>
+            <h2>Description</h2>
+            <p>{{session.description}}</p>
+        </ion-item>
+
+        <ion-item>
+            <h2>Game status</h2>
+            <p>{{session.status}}</p>
+        </ion-item>
+        <ion-item>
+            <h2>Creator</h2>
+            <p>{{creator.firstname}} {{creator.lastname}}</p>
+        </ion-item>
+
+    </ion-list>
 
 </ion-content>

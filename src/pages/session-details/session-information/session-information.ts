@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {Session} from "../../../models/session";
+import {User} from "../../../models/user";
 
 /*
   Generated class for the SessionInformation page.
@@ -14,14 +15,15 @@ import {Session} from "../../../models/session";
 })
 export class SessionInformationPage {
   session = new Session;
+  creator : User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.session = this.navParams.data;
+    this.creator = this.session.participants.find(u=>u._id===this.session.creator);
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SessionInformationPage');
-    this.session = this.navParams.data;
-    console.log(this.navParams);
-    console.log(this.session)
   }
 
 }

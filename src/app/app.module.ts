@@ -22,7 +22,6 @@ import { SocketService } from '../providers/socket-service';
 import { SessionProvider } from '../providers/session-provider';
 import { ThemeProvider } from '../providers/theme-provider';
 
-
 @NgModule({
   declarations: [
     MyApp,

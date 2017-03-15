@@ -3,6 +3,7 @@ export class Card {
     priority: number;
     listNumber: string;
     circlePosition: string;
+    card: string;
     _id: string;
 
     constructor(description: string, priority: number, id: string) {

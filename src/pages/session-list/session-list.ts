@@ -44,6 +44,6 @@ export class SessionListPage {
   }
 
   selectSession(session:Session){
-    this.appCtrl.getRootNav().push(SessionDetailsPage, {session:Session});
+    this.appCtrl.getRootNav().push(SessionDetailsPage, session);
   }
 }

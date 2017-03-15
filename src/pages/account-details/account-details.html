@@ -23,23 +23,23 @@
 <ion-content padding>
     <ion-list inset>
         <ion-item>
-            <h1>Firstname</h1>
-            <p>{{user.firstname}}</p>
+            <ion-label floating>Firstname</ion-label>
+            <ion-input type="text" name=firstname [(ngModel)]="user.firstname" disabled="true"></ion-input>
         </ion-item>
 
         <ion-item>
-            <h1>Name</h1>
-            <p>{{user.lastname}}</p>
+            <ion-label floating>Lastname</ion-label>
+            <ion-input type="text" name=lastname [(ngModel)]="user.lastname" disabled="true"></ion-input>
         </ion-item>
 
         <ion-item>
-            <h1>Organisation</h1>
-            <p>{{user.organisation}}</p>
+            <ion-label floating>Organisation</ion-label>
+            <ion-input type="text" name=organisation [(ngModel)]="user.organisation" disabled="true"></ion-input>
         </ion-item>
 
         <ion-item>
-            <h1>Email address</h1>
-            <p>{{user.emailAddress}}</p>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="email" name="emailAddress" [(ngModel)]="user.emailAddress" disabled="true"></ion-input>
         </ion-item>
 
         <button ion-button full (click)="ChangePass()" class="submit-btn">Change password</button>

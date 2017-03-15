@@ -16,11 +16,12 @@ import {User} from "../../../models/user";
 export class PlayersPage {
   private players : User[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.players = this.navParams.data;
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SessionPlayersPage');
-    this.players = this.navParams.data;
   }
 
 }

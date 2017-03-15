@@ -13,10 +13,6 @@
 </ion-header>
 
 <ion-tabs>
-  <ion-tab [root]="gameRoot"
-           [rootParams]="session"
-           tabTitle="Game"
-           tabIcon="ios-disc"></ion-tab>
   <ion-tab [root]="informationRoot"
            [rootParams]="session"
            tabTitle="details"
@@ -27,6 +23,6 @@
            tabIcon="ios-disc"></ion-tab>
   <ion-tab [root]="playersRoot"
            [rootParams]="session.participants"
-           tabTitle="Players"
-           tabIcon="people"></ion-tab>
+           tabTitle="Chat"
+           tabIcon="chatbubbles"></ion-tab>
 </ion-tabs>

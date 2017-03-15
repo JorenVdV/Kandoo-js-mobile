@@ -21,14 +21,13 @@ export class SessionDetailsPage {
     playersRoot:any = PlayersPage;
     informationRoot:any = SessionInformationPage;
 
-    session = new Session;
+    public session = new Session;
     constructor(public navCtrl:NavController, public navParams:NavParams, public sessionProvider:SessionProvider) {
+        this.session = this.navParams.data;
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad SessionDetailsPage');
-        console.log(this.navCtrl);
-        this.session = this.navParams.data;
     }
 
 }

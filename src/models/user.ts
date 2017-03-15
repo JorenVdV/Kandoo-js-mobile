@@ -3,4 +3,5 @@
     lastname: string;
     organisation: string;
     emailAddress: string;
+    _id: string;
 }

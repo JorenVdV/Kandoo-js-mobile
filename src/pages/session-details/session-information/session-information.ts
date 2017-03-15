@@ -26,4 +26,15 @@ export class SessionInformationPage {
     console.log('ionViewDidLoad SessionInformationPage');
   }
 
+  getColorCircleType(){
+    return this.session.circleType === 'threat'?'red5':'blue5';
+  }
+
+  getColorStatus(){
+    switch (this.session.status){
+      case 'started': return 'secondary';
+      
+    }
+  }
+
 }

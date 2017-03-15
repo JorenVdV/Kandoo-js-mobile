@@ -6,29 +6,30 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>game</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>game</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-list-header *ngIf="!isCurrentUsersTurn()" color="danger" full>
-    <ion-label>
-      {{getGameInfo()}}
-    </ion-label>
-  </ion-list-header>
-  <ion-list padding>
-    <ion-item-sliding *ngFor="let card of session.cardPriorities.sort(comp)">
-      <ion-item color="blue{{card.priority}}">
-        {{card.priority}} {{card.description}}
-      </ion-item>
-      <ion-item-options side="right" *ngIf="isCurrentUsersTurn()">
-        <button ion-button expandable (click)="voteOnCard(card.card)" light>
-          <ion-icon name="arrow-dropup-circle"></ion-icon>
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+    <ion-list-header *ngIf="!isCurrentUsersTurn()" color="danger" full>
+        <ion-label>
+            {{getGameInfo()}}
+        </ion-label>
+    </ion-list-header>
+    <ion-list padding>
+        <ion-item-sliding *ngFor="let card of session.cardPriorities.sort(comp)">
+            <ion-item color="{{getCardColorCode(card.priority)}}">
+                {{card.priority}} {{card.description}}
+                <ion-badge item-right *ngIf="isPriorityMaxed(card.priority)" color="danger">MAXED</ion-badge>
+            </ion-item>
+            <ion-item-options side="right" *ngIf="isCurrentUsersTurn() && !isPriorityMaxed(card.priority)">
+                <button ion-button expandable (click)="voteOnCard(card.card)" light>
+                    <ion-icon name="arrow-dropup-circle"></ion-icon>
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
 </ion-content>

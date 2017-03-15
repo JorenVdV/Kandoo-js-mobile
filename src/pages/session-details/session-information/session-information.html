@@ -24,14 +24,21 @@
             <p>{{session.description}}</p>
         </ion-item>
 
-        <ion-item>
+        <ion-item color="{{getColorStatus()}}">
             <h2>Game status</h2>
             <p>{{session.status}}</p>
         </ion-item>
+
+        <ion-item color="{{getColorCircleType()}}">
+            <h2>Type of session</h2>
+            <p>{{session.circleType}}</p>
+        </ion-item>
+
         <ion-item>
             <h2>Creator</h2>
             <p>{{creator.firstname}} {{creator.lastname}}</p>
         </ion-item>
+
 
     </ion-list>
 

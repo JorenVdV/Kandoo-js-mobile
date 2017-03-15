@@ -17,10 +17,14 @@ import { SessionDetailPage } from '../pages/session-detail/session-detail';
 import { AuthService } from '../providers/auth-service';
 import { URLService } from '../providers/url-service';
 import { UserService } from '../providers/user-service';
-import { SessionDetailsPage } from "../pages/session-details/session-details";
-import { GamePage } from "../pages/session-details/game/game";
-import { PlayersPage } from "../pages/session-details/session-players/session-players";
-import { SessionInformationPage } from "../pages/session-details/session-information/session-information";
+import { SessionDetailsPage } from '../pages/session-details/session-details';
+import { GamePage } from '../pages/session-details/game/game';
+import { PlayersPage } from '../pages/session-details/session-players/session-players';
+import { SessionInformationPage } from '../pages/session-details/session-information/session-information';
+import { ThemeDetailsPage } from '../pages/theme-details/theme-details';
+import { ThemeDetailsInfoPage } from '../pages/theme-details/theme-details-info/theme-details-info';
+import { ThemeDetailsSessionsPage } from '../pages/theme-details/theme-details-sessions/theme-details-sessions';
+
 import { SocketService } from '../providers/socket-service';
 import { SessionProvider } from '../providers/session-provider';
 import { ThemeProvider } from '../providers/theme-provider';
@@ -42,7 +46,10 @@ import { ThemeProvider } from '../providers/theme-provider';
     SessionInformationPage,
     SessionListPage,
     ThemeListPage,
-    InvitedSessionListPage
+    InvitedSessionListPage,
+    ThemeDetailsPage,
+    ThemeDetailsInfoPage,
+    ThemeDetailsSessionsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp,{tabsPlacement:'bottom'})
@@ -63,7 +70,10 @@ import { ThemeProvider } from '../providers/theme-provider';
     SessionInformationPage,
     SessionListPage,
     ThemeListPage,
-    InvitedSessionListPage
+    InvitedSessionListPage,
+    ThemeDetailsPage,
+    ThemeDetailsInfoPage,
+    ThemeDetailsSessionsPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

@@ -37,7 +37,7 @@ export class ThemeProvider {
 
   readThemes(): Observable<Theme[]> {
         return this.http
-            .get(this.url.getURL(`user/${this.auth.getUserID()}/themes`) + '/user/')
+            .get(this.url.getURL(`user/${this.auth.getUserID()}/themes`))
             .map((res: Response) => res.json().themes)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }

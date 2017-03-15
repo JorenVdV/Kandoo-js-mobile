@@ -1,0 +1,22 @@
+<!--
+  Generated template for the ThemeDetailsSessions page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>themeDetailsSessions</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list *ngFor="let session of sessions">
+    <ion-item>
+      {{session.title}}
+    </ion-item>
+  </ion-list>
+</ion-content>

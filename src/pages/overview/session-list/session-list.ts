@@ -4,7 +4,7 @@ import {NavController, NavParams, App} from 'ionic-angular';
 import { SessionProvider } from '../../../providers/session-provider';
 import { Session } from '../../../models/session';
 
-import { SessionDetailPage } from '../../session-detail/session-detail';
+import { SessionDetailsPage } from '../../session-details/session-details';
 
 /*
   Generated class for the Session page.
@@ -44,6 +44,6 @@ export class SessionListPage {
   }
 
   selectSession(session:Session){
-    this.appCtrl.getRootNav().push(SessionDetailPage, {session:Session});
+    this.appCtrl.getRootNav().push(SessionDetailsPage, {session:Session});
  }
 }

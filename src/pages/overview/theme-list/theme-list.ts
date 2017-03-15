@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 
 import { Theme } from '../../../models/theme';
 import { ThemeProvider } from '../../../providers/theme-provider';
+import { ThemeDetailsPage } from '../../theme-details/theme-details';
 
 /*
   Generated class for the Theme page.
@@ -18,7 +19,8 @@ export class ThemeListPage {
   themes: Theme[];
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
-     private themeprov:ThemeProvider) {
+     private themeprov:ThemeProvider,
+     private appCtrl: App) {
       this.themeprov.readThemes().subscribe(
         themes => {
           this.themes = themes
@@ -31,6 +33,10 @@ export class ThemeListPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ThemePage');
+  }
+
+  selectTheme(theme:Theme){
+    this.appCtrl.getRootNav().push(ThemeDetailsPage, {theme:theme});
   }
 
 }

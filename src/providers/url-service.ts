@@ -14,7 +14,6 @@ export class URLService {
   private url:string = "https://kandoo-js-backend.herokuapp.com/";
 
   constructor(public http: Http) {
-    console.log('Hello URL Provider');
   }
 
   public getURL(appendix:string){

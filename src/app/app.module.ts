@@ -1,5 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -77,6 +79,6 @@ import { ThemeProvider } from '../providers/theme-provider';
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
      AuthService, URLService, UserService, SocketService,
-    SessionProvider, ThemeProvider]
+    SessionProvider, ThemeProvider, Storage]
 })
 export class AppModule {}

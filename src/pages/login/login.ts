@@ -26,7 +26,11 @@ export class LoginPage {
     private auth: AuthService, 
     private alertCtrl: AlertController, 
     private loadingCtrl: LoadingController,
-    private socketService: SocketService) {}
+    private socketService: SocketService) {
+      if(this.auth.LoggedIn()){
+        this.nav.setRoot(HomePage);
+      }
+    }
 
 
   public createAccount() {
@@ -40,7 +44,7 @@ export class LoginPage {
       data => {
         setTimeout(() => {
           this.loading.dismiss();
-          this.nav.setRoot(HomePage)
+          this.nav.setRoot(HomePage);
         });
       },
       error => {

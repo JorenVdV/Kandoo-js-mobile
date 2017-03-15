@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
+
+import { Session } from '../../../models/session';
+import { SessionProvider } from '../../../providers/session-provider';
+import { InvitedSessionDetailsPage} from '../../invited-session-details/invited-session-details';
 
 /*
   Generated class for the InvitedSession page.
@@ -13,10 +17,26 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class InvitedSessionListPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  sessions:Session[];
+  constructor(public navCtrl: NavController, 
+  public navParams: NavParams,
+  private sessionprov: SessionProvider,
+  private app: App) {
+    this.sessionprov.readInvitedSessions()
+    .subscribe(
+      sessions => {
+        this.sessions = sessions;
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InvitedSessionPage');
+  }
+
+  selectSession(session:Session){
+    this.app.getRootNav().push(InvitedSessionDetailsPage, {session:session});
   }
 
 }

@@ -14,5 +14,9 @@
 
 
 <ion-content padding>
-
+<ion-list *ngFor="let session of sessions">
+  <ion-item (click)='selectSession(theme)'> 
+    {{session.title}} 
+  </ion-item>
+</ion-list>
 </ion-content>

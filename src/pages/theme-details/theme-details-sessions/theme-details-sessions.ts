@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 
 import { Theme } from '../../../models/theme';
 import { Session } from '../../../models/session';
 import { SessionProvider } from '../../../providers/session-provider';
+import { SessionDetailsPage } from '../../session-details/session-details';
 
 /*
   Generated class for the ThemeDetailsSessions page.
@@ -21,7 +22,8 @@ export class ThemeDetailsSessionsPage {
   sessions:Session[];
   constructor(public navCtrl: NavController, 
   public navParams: NavParams,
-  private sessionprov: SessionProvider) {
+  private sessionprov: SessionProvider,
+  private appctrl: App) {
     this.theme = this.navParams.data;
     this.sessionprov.readThemeSessions(this.theme._id)
       .subscribe(
@@ -34,6 +36,10 @@ export class ThemeDetailsSessionsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ThemeDetailsSessionsPage');
+  }
+
+  selectSession(session:Session){
+    this.appctrl.getRootNav().push(SessionDetailsPage, session);
   }
 
 }

@@ -11,7 +11,7 @@ import * as io from 'socket.io-client';
 */
 @Injectable()
 export class SocketService {
-  private baseURL = 'http://localhost:8000';
+  private baseURL = 'http://localhost:8100';
   private socket;
 
   constructor(){

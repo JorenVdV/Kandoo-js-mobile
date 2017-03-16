@@ -28,8 +28,17 @@ export class GamePage {
     voteOnCard(cardId) {
         if (!this.isCurrentUsersTurn()) return;
         this.sessionProvider.playTurn(this.session._id, cardId).subscribe(
-            //todo
+            data => {
+                console.log(data)
+                this.session.cardPriorities = data.cardPriorities;
+                this.session.currentUser = this.session.participants.find(u=>u.firstname===data.currentUser.firstname)._id;//TODO
+            },
+            err => console.error(err)
         );
+    }
+    
+    canCurrentUserPlay(){
+        return this.session.status === 'started' && this.isCurrentUsersTurn();
     }
 
     isCurrentUsersTurn() {

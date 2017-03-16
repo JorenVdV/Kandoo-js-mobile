@@ -2,23 +2,28 @@ import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { Storage } from '@ionic/storage';
 
 import { User } from '../models/user';
 import { URLService } from '../providers/url-service';
 
-/*
-  Generated class for the AuthService provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 
 @Injectable()
 export class AuthService {
   currentUser: any;
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http, private urlService: URLService) {}
+  constructor(private http: Http, private urlService: URLService, private storage: Storage) {
+    this.storage.ready().then(()=>{
+        this.storage.get('user').then(
+            data => {
+                this.currentUser = JSON.parse(data);
+                // console.log('user found in storage');
+                // console.log(this.currentUser);
+            }, error => console.log(error)
+        );
+    })
+  }
 
   login(emailAddress: string, password: string) {
     return this.http.post(this.urlService.getURL(`login`), 
@@ -28,8 +33,11 @@ export class AuthService {
       }), {headers: this.urlService.getHeaders()})
     .map((response: Response) => {
       let user = response.json().user;
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
       this.currentUser = user;
+    //   console.log(this.currentUser);
+      this.storage.ready().then(
+          ()=> this.storage.set('user', JSON.stringify(this.currentUser))
+      );
       if (response.status == 200)
         return response;
       });
@@ -46,13 +54,15 @@ export class AuthService {
     public logout() {
         return Observable.create(observer => {
             this.currentUser = null;
+            this.storage.ready().then(()=> this.storage.remove('user'));
             observer.next(true);
             observer.complete();
         });
     }
 
     public LoggedIn() {
-        return this.currentUser != null;
+        // console.log(this.currentUser);
+        return this.currentUser != undefined;
     }
 
     private jwt() {
@@ -77,6 +87,8 @@ export class AuthService {
     }
 
     public getUserID(){
+        console.log(this.currentUser);
+        console.log(this.currentUser._id);
         return this.currentUser._id;
     }
     

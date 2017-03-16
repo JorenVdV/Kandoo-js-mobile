@@ -16,10 +16,12 @@ import {User} from "../../../models/user";
 export class SessionInformationPage {
   session = new Session;
   creator : User;
+  // nextVoter: User;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.session = this.navParams.data;
     this.creator = this.session.participants.find(u=>u._id===this.session.creator);
+    // this.nextVoter = this.session.participants.find(u=>u._id===this.session.currentUser)
   }
 
   ionViewDidLoad() {
@@ -32,8 +34,11 @@ export class SessionInformationPage {
 
   getColorStatus(){
     switch (this.session.status){
+      case 'created': return 'primary';
       case 'started': return 'secondary';
-      
+      case 'paused': return 'warning';
+      case 'finished': return 'danger';
+      default: return '';
     }
   }
 

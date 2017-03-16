@@ -25,7 +25,7 @@ export class OverviewPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OverviewPage');
+    // console.log('ionViewDidLoad OverviewPage');
   }
 
   private openAccount(){

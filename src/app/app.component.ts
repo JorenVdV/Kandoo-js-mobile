@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
+import firebase from 'firebase';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -26,6 +27,16 @@ export class MyApp {
   constructor(public platform: Platform) {
     this.initializeApp();
 
+    // Setup firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyBuGaEfvvLewMVp7VA8qEp9WbHWDKTKO-s",
+      authDomain: "kandoechat.firebaseapp.com",
+      databaseURL: "https://kandoechat.firebaseio.com",
+      storageBucket: "kandoechat.appspot.com",
+      messagingSenderId: "812779979995"
+    }
+    firebase.initializeApp(firebaseConfig);
+
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Overview', component:  OverviewPage},
@@ -40,8 +51,6 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
     });

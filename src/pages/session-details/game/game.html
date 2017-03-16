@@ -20,16 +20,12 @@
         </ion-label>
     </ion-list-header>
     <ion-list padding>
-        <ion-item-sliding *ngFor="let card of session.cardPriorities.sort(comp)">
-            <ion-item color="{{getCardColorCode(card.priority)}}">
-                {{card.priority}} {{card.description}}
-                <ion-badge item-right *ngIf="isPriorityMaxed(card.priority)" color="danger">MAXED</ion-badge>
-            </ion-item>
-            <ion-item-options side="right" *ngIf="isCurrentUsersTurn() && !isPriorityMaxed(card.priority)">
-                <button ion-button expandable (click)="voteOnCard(card.card)" light>
-                    <ion-icon name="arrow-dropup-circle"></ion-icon>
-                </button>
-            </ion-item-options>
-        </ion-item-sliding>
+        <ion-item *ngFor="let card of session.cardPriorities.sort(comp)" color="{{getCardColorCode(card.priority)}}">
+            {{card.priority}} {{card.description}}
+            <ion-badge item-right *ngIf="isPriorityMaxed(card.priority)" color="danger">MAXED</ion-badge>
+            <ion-badge item-right *ngIf="canCurrentUserPlay() && !isPriorityMaxed(card.priority)"
+                       (click)="voteOnCard(card.card)" color="secondary">VOTE
+            </ion-badge>
+        </ion-item>
     </ion-list>
 </ion-content>

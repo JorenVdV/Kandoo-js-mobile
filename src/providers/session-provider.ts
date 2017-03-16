@@ -92,8 +92,7 @@ export class SessionProvider {
         let userId = this.auth.getUserID()
         return this.http.put(this.urlService.getURL(`session/${sessionId}/turn`),
             JSON.stringify({userId: userId, cardId: cardId}), {headers: this.urlService.getHeaders()})
-            .map((response:Response) => {
-
-            });
+            .map((res:Response) => res.json())
+            .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 }

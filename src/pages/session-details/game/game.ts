@@ -31,7 +31,7 @@ export class GamePage {
             data => {
                 console.log(data)
                 this.session.cardPriorities = data.cardPriorities;
-                this.session.currentUser = this.session.participants.find(u=>u.firstname===data.currentUser.firstname)._id;//TODO
+                this.session.currentUser = data.currentUser;
             },
             err => console.error(err)
         );
@@ -50,8 +50,8 @@ export class GamePage {
             return 'It is your turn';
         }
         else {
-            let user = this.session.participants.find(u => u._id === this.session.currentUser)
-            return user.firstname + " " + user.lastname + "'s turn"
+            let user = this.session.participants.find(u => u._id === this.session.currentUser._id);
+            return user.firstname + " " + user.lastname + "'s turn";
         }
     }
 

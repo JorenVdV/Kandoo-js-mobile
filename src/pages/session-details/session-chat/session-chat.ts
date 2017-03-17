@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild  } from '@angular/core';
+import { NavController, NavParams, Content } from 'ionic-angular';
 
 import { Session } from '../../../models/session';
 import { ChatMessage } from '../../../models/chatmessage';
@@ -18,6 +18,7 @@ import { AuthService } from '../../../providers/auth-service';
   templateUrl: 'session-chat.html'
 })
 export class SessionChatPage {
+  @ViewChild(Content) content: Content;
   public messages: any[] = [];
   public user: string;
   public session: Session;
@@ -32,7 +33,10 @@ export class SessionChatPage {
       this.session = this.navParams.data;
       this.chatdata.setup(this.session._id);
       this.chatdata.messages.subscribe(
-        data => this.messages.push(data),
+        data => {
+          this.messages.push(data);
+          if(this.content)this.content.scrollToBottom(0);
+        },
         error => console.log(error)
         );
   }
@@ -44,6 +48,10 @@ export class SessionChatPage {
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad SessionChatPage');
+  }
+
+  ngAfterViewChecked(){
+    this.content.scrollToBottom();
   }
 
 }

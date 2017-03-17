@@ -17,6 +17,8 @@ import firebase from 'firebase';
 */
 @Injectable()
 export class GameData {
+  private _sessionID: string;
+
   private _circleCardRef: any;
   private _circleCards$: any;
 
@@ -29,15 +31,16 @@ export class GameData {
     private url: URLService) {
   }
    
-  setup(sessionIDid:string, nextPlayerID:string){
+  setup(sessionID:string, nextPlayerID:string){
+
     //handle card updates
-    this._circleCardRef = firebase.database().ref(`circleCard/${sessionIDid}/turns`);
+    this._circleCardRef = firebase.database().ref(`circleCard/${sessionID}/turns`);
     this._circleCardRef.on('child_added', this.handleCardUpdate, this);
     this._circleCards$ = new ReplaySubject();
 
     // handle change of turns
     this._nextPlayerID = nextPlayerID;
-    this._circleTurnRef = firebase.database().ref(`circleCard/${sessionIDid}/current`);
+    this._circleTurnRef = firebase.database().ref(`circleCard/${sessionID}/current`);
     this._circleTurnRef.on('child_added', this.handleTurnUpdate, this);
     this._circleTurn$ = new ReplaySubject();
   }
@@ -69,7 +72,7 @@ export class GameData {
 
   playturn(cardID:string){
     this.http.put(
-        this.url.getURL(``),
+        this.url.getURL(`session/${this._sessionID}/turn`),
         JSON.stringify({}),
         {headers: this.url.getHeaders()}
       )
@@ -83,9 +86,9 @@ export class GameData {
       }).key;
   }
 
-  setCurrentUser(userID:string){
+  nextUser(){
     return this._circleTurnRef.push({
-      userID:userID
+      userID:this._nextPlayerID
     }).key;
   }
 

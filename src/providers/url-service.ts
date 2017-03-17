@@ -12,12 +12,17 @@ import 'rxjs/add/operator/map';
 export class URLService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private url:string = "https://kandoo-js-backend.herokuapp.com/";
+  private firebase:string = "https://kandoechat.firebaseio.com/";
 
   constructor(public http: Http) {
   }
 
   public getURL(appendix:string){
     return this.url+appendix;
+  }
+
+  public getFireUrl(appendix:string){
+    return this.firebase+appendix
   }
 
   public getHeaders(){

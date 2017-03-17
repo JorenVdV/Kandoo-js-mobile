@@ -27,12 +27,14 @@ export class SessionListPage {
     private sessionprov:SessionProvider,
    private appCtrl: App ) {
      this.getSessions();
+     
   }
 
   getSessions(): void {
     this.sessionprov.readParticipantSessions().subscribe(
       sessions => {
-        this.sessions = sessions
+        this.sessions = sessions;
+        console.log(this.sessions[0]);
       },
       err => { console.log(err); }
     
@@ -40,7 +42,7 @@ export class SessionListPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SessionPage');
+    // console.log('ionViewDidLoad SessionPage');
   }
 
   selectSession(session:Session){

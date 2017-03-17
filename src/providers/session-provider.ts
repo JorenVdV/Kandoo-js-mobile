@@ -88,7 +88,7 @@ export class SessionProvider {
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    public playTurn(sessionId, cardId) {
+    public playTurn(sessionId, cardId?) {
         let userId = this.auth.getUserID()
         return this.http.put(this.urlService.getURL(`session/${sessionId}/turn`),
             JSON.stringify({userId: userId, cardId: cardId}), {headers: this.urlService.getHeaders()})

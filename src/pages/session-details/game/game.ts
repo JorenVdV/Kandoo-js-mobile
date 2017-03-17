@@ -3,6 +3,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import {Session} from "../../../models/session";
 import {SessionProvider} from "../../../providers/session-provider";
 import {AuthService} from "../../../providers/auth-service";
+import { GameData } from '../../../providers/game-data';
 
 /*
  Generated class for the Game page.
@@ -16,12 +17,16 @@ import {AuthService} from "../../../providers/auth-service";
 })
 export class GamePage {
     private session = new Session;
-    private secondsLeft : number;
-    private timer:any;
 
-    constructor(public navCtrl:NavController, public navParams:NavParams, private sessionProvider:SessionProvider, private auth:AuthService) {
+    constructor(
+        public navCtrl:NavController,
+        public navParams:NavParams,
+        private sessionProvider:SessionProvider,
+        private auth:AuthService,
+        private gamedata:GameData        
+        ) {
+
         this.session = this.navParams.data;
-        this.secondsLeft = this.session.turnDuration/1000;
     }
 
     ionViewDidLoad() {
@@ -73,14 +78,9 @@ export class GamePage {
 
     startGame(){
         if(!this.isCurrentUsersTurn())return;
-        this.timer = setInterval(()=>{
-            this.secondsLeft--;
-            //if(this.secondsLeft <=0 ){this.endGame();}
-        }, 1000)
     }
 
     endGame(){
-        clearInterval(this.timer);
         //this.voteOnCard();
     }
 }

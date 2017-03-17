@@ -25,6 +25,7 @@ export class ThemeListPage {
      }
 
   ionViewDidLoad() {
+    // console.log('ionViewDidLoad ThemePage');
   }
 
   selectTheme(theme:Theme){

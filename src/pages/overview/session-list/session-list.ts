@@ -27,6 +27,7 @@ export class SessionListPage {
     private sessionprov:SessionProvider,
    private appCtrl: App ) {
      this.getSessions();
+     
   }
 
   private getSessions(): void {
@@ -37,6 +38,7 @@ export class SessionListPage {
   }
 
   ionViewDidLoad() {
+    // console.log('ionViewDidLoad SessionPage');
   }
 
   selectSession(session:Session){

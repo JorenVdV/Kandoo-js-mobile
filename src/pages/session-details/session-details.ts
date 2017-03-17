@@ -3,6 +3,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import {GamePage} from "./game/game";
 import {PlayersPage} from "./session-players/session-players";
 import {SessionCardsPage} from './session-cards/session-cards';
+import { SessionChatPage } from './session-chat/session-chat';
 import {Session} from "../../models/session";
 import {SessionInformationPage} from "./session-information/session-information";
 import {SessionProvider} from "../../providers/session-provider";
@@ -21,6 +22,7 @@ export class SessionDetailsPage {
     gameRoot:any = GamePage;
     cardsRoot:any = SessionCardsPage;
     playersRoot:any = PlayersPage;
+    chatRoot:any = SessionChatPage;
     informationRoot:any = SessionInformationPage;
 
     public session = new Session;

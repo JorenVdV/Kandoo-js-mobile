@@ -39,6 +39,7 @@ export class SessionChatPage {
 
   addMessage(){
     this.chatdata.sendmessage(new ChatMessage(this.user, this.text));
+    this.text='';
   }
 
   ionViewDidLoad() {

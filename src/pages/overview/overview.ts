@@ -5,7 +5,6 @@ import { AccountDetailsPage } from '../account-details/account-details';
 import { SessionListPage } from './session-list/session-list';
 import { ThemeListPage } from './theme-list/theme-list';
 import { InvitedSessionListPage } from './invited-session-list/invited-session-list';
-import { Session } from '../../models/session';
 /*
   Generated class for the Overview page.
 
@@ -25,7 +24,7 @@ export class OverviewPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OverviewPage');
+    // console.log('ionViewDidLoad OverviewPage');
   }
 
   private openAccount(){

@@ -22,10 +22,14 @@ import { UserService } from '../providers/user-service';
 import { SessionDetailsPage } from '../pages/session-details/session-details';
 import { GamePage } from '../pages/session-details/game/game';
 import { PlayersPage } from '../pages/session-details/session-players/session-players';
+
+import { SessionCardsPage } from '../pages/session-details/session-cards/session-cards';
+import { SessionCardsSelectPage } from '../pages/session-details/session-cards-select/session-cards-select';
 import { SessionInformationPage } from '../pages/session-details/session-information/session-information';
 import { ThemeDetailsPage } from '../pages/theme-details/theme-details';
 import { ThemeDetailsInfoPage } from '../pages/theme-details/theme-details-info/theme-details-info';
 import { ThemeDetailsSessionsPage } from '../pages/theme-details/theme-details-sessions/theme-details-sessions';
+import { InvitedSessionDetailsPage } from '../pages/invited-session-details/invited-session-details';
 
 import { SocketService } from '../providers/socket-service';
 import { SessionProvider } from '../providers/session-provider';
@@ -50,7 +54,10 @@ import { ThemeProvider } from '../providers/theme-provider';
     InvitedSessionListPage,
     ThemeDetailsPage,
     ThemeDetailsInfoPage,
-    ThemeDetailsSessionsPage
+    ThemeDetailsSessionsPage,
+    InvitedSessionDetailsPage,
+    SessionCardsPage,
+    SessionCardsSelectPage
   ],
   imports: [
     IonicModule.forRoot(MyApp,{tabsPlacement:'bottom'})
@@ -74,7 +81,10 @@ import { ThemeProvider } from '../providers/theme-provider';
     InvitedSessionListPage,
     ThemeDetailsPage,
     ThemeDetailsInfoPage,
-    ThemeDetailsSessionsPage
+    ThemeDetailsSessionsPage,
+    InvitedSessionDetailsPage,
+    SessionCardsPage,
+    SessionCardsSelectPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

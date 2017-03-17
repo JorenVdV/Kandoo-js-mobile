@@ -29,21 +29,22 @@ export class SessionListPage {
      this.getSessions();
   }
 
-  getSessions(): void {
+  private getSessions(): void {
     this.sessionprov.readParticipantSessions().subscribe(
-      sessions => {
-        this.sessions = sessions
-      },
-      err => { console.log(err); }
-    
+      sessions => this.sessions = sessions,
+      err => console.log(err)
     );
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SessionPage');
   }
 
   selectSession(session:Session){
     this.appCtrl.getRootNav().push(SessionDetailsPage, session);
+  }
+
+  doRefresh(refresher){
+    this.getSessions();
+    refresher.complete();
   }
 }

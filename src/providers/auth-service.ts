@@ -87,8 +87,8 @@ export class AuthService {
     }
 
     public getUserID(){
-        console.log(this.currentUser);
-        console.log(this.currentUser._id);
+        // console.log(this.currentUser);
+        // console.log(this.currentUser._id);
         return this.currentUser._id;
     }
     

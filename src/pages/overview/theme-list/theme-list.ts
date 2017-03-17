@@ -21,7 +21,23 @@ export class ThemeListPage {
      public navParams: NavParams,
      private themeprov:ThemeProvider,
      private appCtrl: App) {
-      this.themeprov.readThemes().subscribe(
+      this.loadThemes();
+     }
+
+  ionViewDidLoad() {
+  }
+
+  selectTheme(theme:Theme){
+    this.appCtrl.getRootNav().push(ThemeDetailsPage, {theme:theme});
+  }
+  
+  doRefresh(refresher){
+    this.loadThemes();
+    refresher.complete();
+  }
+
+  private loadThemes(){
+    this.themeprov.readThemes().subscribe(
         themes => {
           this.themes = themes
         },
@@ -29,14 +45,6 @@ export class ThemeListPage {
           console.log(err);
         }
       );
-     }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ThemePage');
-  }
-
-  selectTheme(theme:Theme){
-    this.appCtrl.getRootNav().push(ThemeDetailsPage, {theme:theme});
   }
 
 }

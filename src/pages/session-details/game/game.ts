@@ -75,12 +75,17 @@ export class GamePage {
         if(!this.isCurrentUsersTurn())return;
         this.timer = setInterval(()=>{
             this.secondsLeft--;
-            //if(this.secondsLeft <=0 ){this.endGame();}
+            if(this.secondsLeft <=0 ){this.endGame();}
         }, 1000)
     }
 
     endGame(){
         clearInterval(this.timer);
-        //this.voteOnCard();
+        this.voteOnCard();
+    }
+
+    getHeaderColor(){
+        if(this.isCurrentUsersTurn()) return "secondary";
+        return "danger";
     }
 }

@@ -12,7 +12,6 @@ import { URLService } from '../providers/url-service';
 export class AuthService {
   private _currentUser: any;
   private _currentUserData: any;
-  private _loggedIn = false;
 //   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http, private urlService: URLService, private storage: Storage) {
@@ -21,7 +20,6 @@ export class AuthService {
         this.storage.get('user').then(
             data => {
                 let {emailAddress,password} = JSON.parse(data);
-                this._loggedIn = true;
                 this.login(emailAddress, password);
             }, error => console.log(error)
         )}

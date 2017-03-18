@@ -17,8 +17,6 @@ import {Card} from "../models/card";
  */
 @Injectable()
 export class SessionProvider {
-    private headers = new Headers({'Content-Type': 'application/json'});
-
     constructor(public http:Http, private urlService:URLService, private auth:AuthService) {
     }
 

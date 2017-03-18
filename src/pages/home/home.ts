@@ -14,8 +14,11 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    public auths: AuthService) {
-      if(this.auths.LoggedIn()){
+    public auths: AuthService) {  
+  }
+
+  ionViewDidLoad(){
+    if(this.auths.LoggedIn()){
         this.navCtrl.setRoot(OverviewPage);
       }
   }

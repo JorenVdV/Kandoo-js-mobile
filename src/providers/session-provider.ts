@@ -79,19 +79,23 @@ export class SessionProvider {
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    acceptInvite(session:Session):Observable<Session[]> {
-        return this.http
-            .put(this.urlService.getURL(`session/${session._id}/accept`),
+    acceptInvite(session:Session) {
+        return this.http.put(
+                this.urlService.getURL(`session/${session._id}/accept`),
                 JSON.stringify({userId: this.auth.getUserID()}),
-                {headers: this.urlService.getHeaders()})
-            .map((res:Response) => res.json())
+                {headers: this.urlService.getHeaders()}
+                )
+            .map( (res:Response) => res.json())
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    public playTurn(sessionId, cardId?) {
-        let userId = this.auth.getUserID()
-        return this.http.put(this.urlService.getURL(`session/${sessionId}/turn`),
-            JSON.stringify({userId: userId, cardId: cardId}), {headers: this.urlService.getHeaders()})
+    public playTurn(sessionId, cardId) {
+        let userId = this.auth.getUserID();
+        return this.http.put(
+                this.urlService.getURL(`session/${sessionId}/turn`),
+                JSON.stringify({userId: userId, cardId: cardId}),
+                {headers: this.urlService.getHeaders()}
+                )
             .map((res:Response) => res.json())
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }

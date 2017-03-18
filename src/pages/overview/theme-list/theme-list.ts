@@ -21,14 +21,7 @@ export class ThemeListPage {
      public navParams: NavParams,
      private themeprov:ThemeProvider,
      private appCtrl: App) {
-      this.themeprov.readThemes().subscribe(
-        themes => {
-          this.themes = themes
-        },
-        err => {
-          console.log(err);
-        }
-      );
+      this.loadThemes();
      }
 
   ionViewDidLoad() {
@@ -37,6 +30,22 @@ export class ThemeListPage {
 
   selectTheme(theme:Theme){
     this.appCtrl.getRootNav().push(ThemeDetailsPage, {theme:theme});
+  }
+  
+  doRefresh(refresher){
+    this.loadThemes();
+    refresher.complete();
+  }
+
+  private loadThemes(){
+    this.themeprov.readThemes().subscribe(
+        themes => {
+          this.themes = themes
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 
 }

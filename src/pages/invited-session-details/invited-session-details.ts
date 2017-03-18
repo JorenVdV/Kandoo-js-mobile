@@ -20,14 +20,19 @@ export class InvitedSessionDetailsPage {
   public navParams: NavParams,
   private sessionprov: SessionProvider) {
     this.session = this.navParams.get('session');
+    // console.log(this.session);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InvitedSessionDetailsPage');
   }
 
+
   acceptInvite(){
-    this.sessionprov.acceptInvite(this.session);
+    this.sessionprov.acceptInvite(this.session).subscribe(
+      () => {
+        this.navCtrl.pop();
+      } 
+    );
   }
 
 }

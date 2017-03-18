@@ -30,14 +30,10 @@ export class SessionListPage {
      
   }
 
-  getSessions(): void {
+  private getSessions(): void {
     this.sessionprov.readParticipantSessions().subscribe(
-      sessions => {
-        this.sessions = sessions;
-        console.log(this.sessions[0]);
-      },
-      err => { console.log(err); }
-    
+      sessions => this.sessions = sessions,
+      err => console.log(err)
     );
   }
 
@@ -47,5 +43,10 @@ export class SessionListPage {
 
   selectSession(session:Session){
     this.appCtrl.getRootNav().push(SessionDetailsPage, session);
+  }
+
+  doRefresh(refresher){
+    this.getSessions();
+    refresher.complete();
   }
 }

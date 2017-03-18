@@ -22,6 +22,22 @@ export class InvitedSessionListPage {
   public navParams: NavParams,
   private sessionprov: SessionProvider,
   private app: App) {
+    this.loadSessions();
+  }
+
+  ionViewDidLoad() {
+  }
+
+  selectSession(session:Session){
+    this.app.getRootNav().push(InvitedSessionDetailsPage, {session:session});
+  }
+
+  doRefresh(refresher){
+    this.loadSessions();
+    refresher.complete();
+  }
+
+  private loadSessions(){
     this.sessionprov.readInvitedSessions()
     .subscribe(
       sessions => {
@@ -30,13 +46,6 @@ export class InvitedSessionListPage {
         console.log(error);
       }
     )
-  }
-
-  ionViewDidLoad() {
-  }
-
-  selectSession(session:Session){
-    this.app.getRootNav().push(InvitedSessionDetailsPage, {session:session});
   }
 
 }

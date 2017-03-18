@@ -4,7 +4,6 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/map';
 
 import firebase from 'firebase';
-import { URLService } from './url-service';
 import { ChatMessage } from '../models/chatmessage';
 
 
@@ -19,7 +18,7 @@ export class ChatData {
   private _messages$: any;
   private _messagesRef: any;
 
-  constructor(public http: Http, private url: URLService) {
+  constructor(public http: Http) {
     
   }
 

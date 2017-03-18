@@ -20,14 +20,13 @@
   <ion-tab [root]="gameRoot"
            [rootParams]="session"
            tabTitle="Game"
-           tabIcon="ios-disc"
-  ></ion-tab>
+           tabIcon="ios-disc"></ion-tab>
   <ion-tab [root]="chatRoot"
            [rootParams]="session"
            tabTitle="Chat"
            tabIcon="chatbubbles"></ion-tab>
   <ion-tab [root]="cardsRoot"
-           [rootParams]="session"
+           [rootParams]="{sessionId: session._id, sessionCards: session.sessionCards, pickedCards: session.pickedCards}"
            tabTitle="Cards"
            tabIcon="albums"></ion-tab>
 </ion-tabs>

@@ -47,7 +47,9 @@ export class SessionProvider {
     readSession(id:string):Observable<Session> {
         return this.http
             .get(this.urlService.getURL(`session/${id}`))
-            .map((res:Response) => res.json().session)
+            .map((res:Response) => {
+                res.json().session
+            })
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 
@@ -81,21 +83,30 @@ export class SessionProvider {
 
     acceptInvite(session:Session) {
         return this.http.put(
-                this.urlService.getURL(`session/${session._id}/accept`),
-                JSON.stringify({userId: this.auth.getUserID()}),
-                {headers: this.urlService.getHeaders()}
-                )
-            .map( (res:Response) => res.json())
+            this.urlService.getURL(`session/${session._id}/accept`),
+            JSON.stringify({userId: this.auth.getUserID()}),
+            {headers: this.urlService.getHeaders()}
+        )
+            .map((res:Response) => res.json())
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     public playTurn(sessionId, cardId) {
         let userId = this.auth.getUserID();
         return this.http.put(
-                this.urlService.getURL(`session/${sessionId}/turn`),
-                JSON.stringify({userId: userId, cardId: cardId}),
-                {headers: this.urlService.getHeaders()}
-                )
+            this.urlService.getURL(`session/${sessionId}/turn`),
+            JSON.stringify({userId: userId, cardId: cardId}),
+            {headers: this.urlService.getHeaders()})
+            .map((res:Response) => res.json())
+            .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    public pickCards(sessionId, cards) {
+        let userId = this.auth.getUserID();
+        return this.http.put(
+            this.urlService.getURL(`session/${sessionId}/pick`),
+            JSON.stringify({userId: userId, cards: cards}),
+            {headers: this.urlService.getHeaders()})
             .map((res:Response) => res.json())
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }

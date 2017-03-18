@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content *ngIf="this.session.status !== 'created'">
+<ion-content>
     <ion-list-header color="{{getHeaderColor()}}" full>
         <ion-label>
             {{getGameInfo()}}
@@ -26,13 +26,10 @@
         <ion-item *ngFor="let card of session.cardPriorities.sort(comp)" color="{{getCardColorCode(card.priority)}}">
             {{card.priority}} {{card.description}}
             <ion-badge item-right *ngIf="isPriorityMaxed(card.priority)" color="danger">MAXED</ion-badge>
-            <ion-badge item-right *ngIf="this.session.status === 'started' && isCurrentUsersTurn() && !isPriorityMaxed(card.priority)"
+            <ion-badge item-right
+                       *ngIf="this.session.status === 'started' && isCurrentUsersTurn() && !isPriorityMaxed(card.priority)"
                        (click)="voteOnCard(card.card._id)" color="secondary">VOTE
             </ion-badge>
         </ion-item>
     </ion-list>
-</ion-content>
-
-<ion-content *ngIf="this.session.status === 'created'">
-    Game not started yet
 </ion-content>

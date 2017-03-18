@@ -10,59 +10,75 @@ import { URLService } from '../providers/url-service';
 
 @Injectable()
 export class AuthService {
-  currentUser: any;
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private _currentUser: any;
+  private _currentUserData: any;
+  private _loggedIn = false;
+//   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http, private urlService: URLService, private storage: Storage) {
-    this.storage.ready().then(()=>{
+    this.storage.ready().then(()=> {
+        // retrieve email and password
         this.storage.get('user').then(
             data => {
-                this.currentUser = JSON.parse(data);
-                // console.log('user found in storage');
-                // console.log(this.currentUser);
+                let {emailAddress,password} = JSON.parse(data);
+                this._loggedIn = true;
+                this.login(emailAddress, password);
             }, error => console.log(error)
+        )}
+    )
+  }
+
+    login(emailAddress: string, password: string) {
+        // store credentials 
+        this.storage.ready().then(
+            ()=>this.storage.set('user', JSON.stringify({ emailAddress: emailAddress, password: password}))
         );
-    })
-  }
 
-  login(emailAddress: string, password: string) {
-    return this.http.post(this.urlService.getURL(`login`), 
-      JSON.stringify({
-        emailAddress: emailAddress,
-        password: password
-      }), {headers: this.urlService.getHeaders()})
-    .map((response: Response) => {
-      let user = response.json().user;
-      this.currentUser = user;
-    //   console.log(this.currentUser);
-      this.storage.ready().then(
-          ()=> this.storage.set('user', JSON.stringify(this.currentUser))
-      );
-      if (response.status == 200)
-        return response;
-      });
-  }
+        // retrieve id and token
+        return this.http.post(this.urlService.getURL(`login`), 
+            JSON.stringify({ emailAddress: emailAddress, password: password}),
+            {headers: this.urlService.getHeaders()})
+        .map((response: Response) => {
+            let user = response.json();
+            this._currentUser = user;
+            // set signed headers for token usage
+            this.urlService.setSignedheaders(this._currentUser.token);
 
-  public register(user:any) {
-    return this.http.post(this.urlService.getURL('register'), user, this.jwt());
-  }
+            // retrieve current user data
+            this.http.get( this.urlService.getURL(`user/${this._currentUser.userId}`),
+                {headers:this.urlService.getSignedHeaders()})
+            .map((response:Response) => {
+                let userData = response.json().user;
+            }).subscribe();  
+        if (response.status == 200)
+            return response;
+        });
+    }
+
+    public register(user:any) {
+        return this.http.post(this.urlService.getURL('register'), user, this.jwt());
+    }
 
     public getUserInfo():User {
-        return this.currentUser;
+        return this._currentUserData;
     }
 
     public logout() {
         return Observable.create(observer => {
-            this.currentUser = null;
-            this.storage.ready().then(()=> this.storage.remove('user'));
+            this._currentUser = null;
+            this._currentUserData = null;
+            this.storage.ready().then(()=>{
+                this.storage.remove('user');
+                this.storage.remove('userData');
+            });
+            this.urlService.removeSignedHeader();
             observer.next(true);
             observer.complete();
         });
     }
 
     public LoggedIn() {
-        // console.log(this.currentUser);
-        return this.currentUser != undefined;
+        return this._currentUser != undefined;
     }
 
     private jwt() {
@@ -75,32 +91,27 @@ export class AuthService {
     }
 
     public changePassword(oldPassword, newPassword) {
-        this.currentUser.password = newPassword;
-        return this.http.put(this.urlService.getURL(`user/${this.currentUser._id}/update`),
-            JSON.stringify({
-                password: newPassword,
-                originalPassword: oldPassword
-            }), {headers: this.headers})
-            .map((response:Response) => {
-                this.setUserWithResponse(response);
-            })
+        return this.http.put(
+            this.urlService.getURL(`user/${this._currentUser._id}/update`),
+            JSON.stringify({password: newPassword,originalPassword: oldPassword}),
+            {headers: this.urlService.getSignedHeaders()}
+        ).map((response:Response) => {
+            this._currentUserData = response.json().user;
+            this.storage.ready().then(()=> this.storage.set('userData', JSON.stringify(this._currentUserData)));
+        })
     }
 
     public getUserID(){
-        // console.log(this.currentUser);
-        // console.log(this.currentUser._id);
-        return this.currentUser._id;
+        return this._currentUser.userId;
     }
     
     public updateUser(user:User) {
-        return this.http.put(this.urlService.getURL(`user/${this.currentUser._id}/update`),
-            JSON.stringify(user), {headers: this.headers})
-            .map((response:Response) => {
-                this.currentUser = response.json();
-            })
-    }
-
-    private setUserWithResponse(response:Response) {
-        this.currentUser = response.json().user;
+        return this.http.put(this.urlService.getURL(`user/${this._currentUser.userId}/update`),
+        JSON.stringify(user),
+        {headers:this.urlService.getSignedHeaders()}
+        ).map((response:Response) => {
+            this._currentUserData = response.json().user;
+            this.storage.ready().then(()=> this.storage.set('userData', this._currentUserData));
+        })
     }
 }

@@ -4,7 +4,7 @@ import { AuthService } from '../../providers/auth-service';
 // import { SocketService } from '../../providers/socket-service';
 
 import { RegisterPage } from '../register/register';
-import { HomePage } from '../home/home';
+import { OverviewPage } from '../overview/overview';
 
 
 /*
@@ -29,7 +29,7 @@ export class LoginPage {
     // private socketService: SocketService
     ) {
       if(this.auth.LoggedIn()){
-        this.nav.setRoot(HomePage);
+        this.nav.setRoot(OverviewPage);
       }
     }
 
@@ -45,7 +45,7 @@ export class LoginPage {
       data => {
         setTimeout(() => {
           this.loading.dismiss();
-          this.nav.setRoot(HomePage);
+          this.nav.setRoot(OverviewPage);
         });
       },
       error => {

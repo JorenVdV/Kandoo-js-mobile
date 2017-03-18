@@ -14,13 +14,16 @@ export class AuthService {
   private _currentUserData: any;
 //   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http, private urlService: URLService, private storage: Storage) {
+  constructor(private http: Http, 
+    private urlService: URLService, 
+    private storage: Storage ) {
     this.storage.ready().then(()=> {
         // retrieve email and password
         this.storage.get('user').then(
             data => {
+                if(data==null)return;
                 let {emailAddress,password} = JSON.parse(data);
-                this.login(emailAddress, password);
+                this.login(emailAddress, password).subscribe();
             }, error => console.log(error)
         )}
     )
@@ -41,14 +44,13 @@ export class AuthService {
             this._currentUser = user;
             // set signed headers for token usage
             this.urlService.setSignedheaders(this._currentUser.token);
-
             // retrieve current user data
             this.http.get( this.urlService.getURL(`user/${this._currentUser.userId}`),
                 {headers:this.urlService.getSignedHeaders()})
             .map((response:Response) => {
                 let userData = response.json().user;
                 this._currentUserData = userData;
-            }).subscribe();  
+            }).subscribe();
         if (response.status == 200)
             return response;
         });

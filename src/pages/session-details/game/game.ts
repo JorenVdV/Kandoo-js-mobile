@@ -3,6 +3,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import {Session} from "../../../models/session";
 import {SessionProvider} from "../../../providers/session-provider";
 import {AuthService} from "../../../providers/auth-service";
+import { GameData } from '../../../providers/game-data';
 
 /*
  Generated class for the Game page.
@@ -17,21 +18,29 @@ import {AuthService} from "../../../providers/auth-service";
 export class GamePage {
     private session = new Session;
 
-    constructor(public navCtrl:NavController, public navParams:NavParams, private sessionProvider:SessionProvider, private auth:AuthService) {
+    constructor(
+        public navCtrl:NavController,
+        public navParams:NavParams,
+        private sessionProvider:SessionProvider,
+        private auth:AuthService,
+        private gamedata:GameData        
+        ) {
+
         this.session = this.navParams.data;
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad GamePage');
+        this.startGame();
     }
 
-    voteOnCard(cardId) {
+    voteOnCard(cardId?) {
         if (!this.isCurrentUsersTurn()) return;
         this.sessionProvider.playTurn(this.session._id, cardId).subscribe(
             data => {
                 console.log(data)
                 this.session.cardPriorities = data.cardPriorities;
-                this.session.currentUser = this.session.participants.find(u=>u.firstname===data.currentUser.firstname)._id;//TODO
+                this.session.currentUser = data.currentUser;
             },
             err => console.error(err)
         );
@@ -42,7 +51,7 @@ export class GamePage {
     }
 
     isCurrentUsersTurn() {
-        return this.auth.getUserID() === this.session.currentUser;
+        return this.auth.getUserID() === this.session.currentUser._id;
     }
 
     public getGameInfo() {
@@ -50,8 +59,8 @@ export class GamePage {
             return 'It is your turn';
         }
         else {
-            let user = this.session.participants.find(u => u._id === this.session.currentUser)
-            return user.firstname + " " + user.lastname + "'s turn"
+            let user = this.session.participants.find(u => u._id === this.session.currentUser._id);
+            return user.firstname + " " + user.lastname + "'s turn";
         }
     }
 
@@ -67,4 +76,11 @@ export class GamePage {
         return this.session.amountOfCircles <= priority;
     }
 
+    startGame(){
+        if(!this.isCurrentUsersTurn())return;
+    }
+
+    endGame(){
+        //this.voteOnCard();
+    }
 }

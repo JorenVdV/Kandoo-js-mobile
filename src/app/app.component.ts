@@ -34,7 +34,7 @@ export class MyApp {
       databaseURL: "https://kandoechat.firebaseio.com",
       storageBucket: "kandoechat.appspot.com",
       messagingSenderId: "812779979995"
-    }
+    };
     firebase.initializeApp(firebaseConfig);
 
     // used for an example of ngFor and navigation

@@ -26,7 +26,7 @@ export class Session {
     sessionCards: Card[];
     pickedCards: Card[];
     cardPriorities: Card[];
-    currentUser: string;
+    currentUser: User;
     status: string;
 }
 

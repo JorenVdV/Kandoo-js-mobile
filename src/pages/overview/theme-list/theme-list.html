@@ -14,6 +14,9 @@
 
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>Pull down to refresh</ion-refresher-content>
+  </ion-refresher>
   <ion-list *ngFor="let theme of themes">
     <ion-item (click)="selectTheme(theme)">
       {{theme.title}}

@@ -14,9 +14,12 @@
 
 
 <ion-content padding>
-<ion-list *ngFor="let session of sessions">
-  <ion-item (click)='selectSession(theme)'> 
-    {{session.title}} 
-  </ion-item>
-</ion-list>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>Pull down to refresh</ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngFor="let session of sessions">
+    <ion-item (click)='selectSession(session)'> 
+      {{session.title}} 
+    </ion-item>
+  </ion-list>
 </ion-content>

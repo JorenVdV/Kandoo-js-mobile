@@ -51,7 +51,7 @@ export class SessionChatPage {
   }
 
   ngAfterViewChecked(){
-    this.content.scrollToBottom();
+     if(this.content)this.content.scrollToBottom();
   }
 
 }

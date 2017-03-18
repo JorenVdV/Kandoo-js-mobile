@@ -34,7 +34,7 @@ export class AccountDetailsPage {
   
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AccountDetailsPage');
+    // console.log('ionViewDidLoad AccountDetailsPage');
     this.user = this.auths.getUserInfo();
   }
 

@@ -61,7 +61,7 @@ export class AuthService {
     }
 
     public getUserInfo():User {
-        console.log(this._currentUserData);
+        // console.log(this._currentUserData);
         return this._currentUserData;
     }
 

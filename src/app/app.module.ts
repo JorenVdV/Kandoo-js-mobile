@@ -95,7 +95,7 @@ import { GameData } from '../providers/game-data';
      AuthService, 
      URLService, 
      UserService, 
-     SocketService,
+    //  SocketService,
      SessionProvider, 
      ThemeProvider, 
      Storage, 

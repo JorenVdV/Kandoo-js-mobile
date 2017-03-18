@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
-import { SocketService } from '../../providers/socket-service';
+// import { SocketService } from '../../providers/socket-service';
 
 import { RegisterPage } from '../register/register';
 import { HomePage } from '../home/home';
@@ -26,7 +26,8 @@ export class LoginPage {
     private auth: AuthService, 
     private alertCtrl: AlertController, 
     private loadingCtrl: LoadingController,
-    private socketService: SocketService) {
+    // private socketService: SocketService
+    ) {
       if(this.auth.LoggedIn()){
         this.nav.setRoot(HomePage);
       }

@@ -15,10 +15,8 @@
 
 <ion-content padding>
     <ion-item *ngFor="let cardAdd of cards">
-        <ion-toggle [(ngModel)]="cardAdd.add"></ion-toggle>
+        <ion-toggle [(ngModel)]="cardAdd.add"
+                    (ionChange)="savePickedCards()"></ion-toggle>
         <ion-label> {{cardAdd.card.description}}</ion-label>
     </ion-item>
-
-    <button ion-button class="submit-btn" full (click)="safePickedCards()">Save changes</button>
-
 </ion-content>

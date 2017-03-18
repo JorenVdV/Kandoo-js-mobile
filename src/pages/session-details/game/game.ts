@@ -3,6 +3,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import {Session} from "../../../models/session";
 import {SessionProvider} from "../../../providers/session-provider";
 import {AuthService} from "../../../providers/auth-service";
+import {GameData} from "../../../providers/game-data";
 
 /*
  Generated class for the Game page.

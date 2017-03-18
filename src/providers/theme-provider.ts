@@ -18,26 +18,29 @@ import { Theme } from '../models/theme';
 @Injectable()
 export class ThemeProvider {
 
-  constructor(public http: Http, private auth:AuthService, private url:URLService) {
+  constructor(public http: Http, private auth:AuthService, private urlService:URLService) {
   }
 
   readTheme(id: string): Observable<Theme> {
     return this.http
-      .get(this.url.getURL(`theme/${id}`))
+      .get(this.urlService.getURL(`theme/${id}`),
+          {headers: this.urlService.getSignedHeaders()})
       .map((res: Response) => res.json().theme)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   readThemeSessions(id: string): Observable<Theme>{
     return this.http
-      .get(this.url.getURL(`user/${this.auth.getUserID()}/sessions`))
+      .get(this.urlService.getURL(`user/${this.auth.getUserID()}/sessions`),
+          {headers: this.urlService.getSignedHeaders()})
       .map((res:Response) => res.json().sessions)
       .catch((error:any)=> Observable.throw(error.json().error || 'Server error'));
   }
 
   readThemes(): Observable<Theme[]> {
         return this.http
-            .get(this.url.getURL(`user/${this.auth.getUserID()}/themes`))
+            .get(this.urlService.getURL(`user/${this.auth.getUserID()}/themes`),
+                {headers: this.urlService.getSignedHeaders()})
             .map((res: Response) => res.json().themes)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }

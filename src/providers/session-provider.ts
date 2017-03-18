@@ -39,7 +39,7 @@ export class SessionProvider {
                     cardsCanBeAdded: session.cardsCanBeAdded,
                     creator: this.auth.getUserID()
 
-                }), {headers: this.urlService.getHeaders()})
+                }), {headers: this.urlService.getSignedHeaders()})
             .map((res:Response) => res.json())
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }

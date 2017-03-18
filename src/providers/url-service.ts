@@ -10,23 +10,34 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class URLService {
-  private headers = new Headers({'Content-Type': 'application/json'});
-  private url:string = "https://kandoo-js-backend.herokuapp.com/";
-  private firebase:string = "https://kandoechat.firebaseio.com/";
+  private _headers = new Headers({'Content-Type': 'application/json'});
+  private _signedHeaders : Headers;
+  private _url:string = "https://kandoo-js-backend.herokuapp.com/";
 
   constructor(public http: Http) {
   }
 
   public getURL(appendix:string){
-    return this.url+appendix;
-  }
-
-  public getFireUrl(appendix:string){
-    return this.firebase+appendix
+    return this._url+appendix;
   }
 
   public getHeaders(){
-    return this.headers;
+    return this._headers;
+  }
+
+  public setSignedheaders(token:string){
+    this._signedHeaders = new Headers({
+      'Content-Type': 'application/json',
+      'X-Access-Token' : token
+    })
+  }
+
+  public removeSignedHeader(){
+    this._signedHeaders = null;
+  }
+
+  public getSignedHeaders(){
+    return this._signedHeaders == undefined? this.getHeaders(): this._signedHeaders;
   }
 
 }

@@ -16,17 +16,20 @@ import {AuthService} from "../../../providers/auth-service";
 })
 export class GamePage {
     private session = new Session;
-    private secondsLeft : number;
-    private timer:any;
 
-    constructor(public navCtrl:NavController, public navParams:NavParams, private sessionProvider:SessionProvider, private auth:AuthService) {
+    constructor(
+        public navCtrl:NavController,
+        public navParams:NavParams,
+        private sessionProvider:SessionProvider,
+        private auth:AuthService,
+        private gamedata:GameData        
+        ) {
+
         this.session = this.navParams.data;
-        this.secondsLeft = this.session.turnDuration/1000;
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad GamePage');
-        this.startGame();
     }
 
     voteOnCard(cardId?) {
@@ -69,23 +72,5 @@ export class GamePage {
     
     isPriorityMaxed(priority){
         return this.session.amountOfCircles <= priority;
-    }
-
-    startGame(){
-        if(!this.isCurrentUsersTurn())return;
-        this.timer = setInterval(()=>{
-            this.secondsLeft--;
-            if(this.secondsLeft <=0 ){this.endGame();}
-        }, 1000)
-    }
-
-    endGame(){
-        clearInterval(this.timer);
-        this.voteOnCard();
-    }
-
-    getHeaderColor(){
-        if(this.isCurrentUsersTurn()) return "secondary";
-        return "danger";
     }
 }

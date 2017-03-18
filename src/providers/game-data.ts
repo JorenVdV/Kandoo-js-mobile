@@ -73,23 +73,18 @@ export class GameData {
   playturn(cardID:string){
     this.http.put(
         this.url.getURL(`session/${this._sessionID}/turn`),
-        JSON.stringify({}),
+        JSON.stringify({userID:this.auth.getUserID(),cardID:cardID}),
         {headers: this.url.getHeaders()}
       )
       .map((res:Response) => res.json())
       .catch((error:any) =>  Observable.throw(error.json().error || 'Server error'))
       .subscribe();
 
-    return this._circleCardRef.push(
-      {userID:this.auth.getUserID(),
-       cardID:cardID
-      }).key;
+    return this._circleCardRef.push({userID:this.auth.getUserID(),cardID:cardID}).key;
   }
 
   nextUser(){
-    return this._circleTurnRef.push({
-      userID:this._nextPlayerID
-    }).key;
+    return this._circleTurnRef.push({userID:this._nextPlayerID}).key;
   }
 
 }

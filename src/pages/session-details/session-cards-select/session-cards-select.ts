@@ -27,10 +27,10 @@ export class SessionCardsSelectPage {
         navParams.data.sessionCards.forEach((card)=> {
             this.cards.push({
                 card: card,
-                add: navParams.data.pickedCards.includes(c => c.userId === this.auth.getUserID() &&
-                    c.cards.includes(cid => cid === card._id))
+                add: navParams.data.pickedCards
+                        .find(pc => pc.userId === this.auth.getUserID())
+                        .cards.includes(card._id)
             })
-            console.log(navParams.data.pickedCards.filter(pc => pc.userId === this.auth.getUserID()).cards.includes(card.id))
         });
 
     }
@@ -39,7 +39,7 @@ export class SessionCardsSelectPage {
         console.log('ionViewDidLoad SessionCardsSelectPage');
     }
     
-    safePickedCards(){
+    savePickedCards(){
         this.sessionProvider.pickCards(this.sessionId,
             this.cards
                 .filter(c=>c.add)

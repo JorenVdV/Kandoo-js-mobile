@@ -44,7 +44,8 @@ export class SessionProvider {
 
     readSession(id:string):Observable<Session> {
         return this.http
-            .get(this.urlService.getURL(`session/${id}`))
+            .get(this.urlService.getURL(`session/${id}`),
+                {headers: this.urlService.getSignedHeaders()})
             .map((res:Response) => {
                 res.json().session
             })
@@ -53,28 +54,32 @@ export class SessionProvider {
 
     readSessions(id:string):Observable<Session[]> {
         return this.http
-            .get(this.urlService.getURL(`theme/${id}/sessions`))
+            .get(this.urlService.getURL(`theme/${id}/sessions`),
+                {headers: this.urlService.getSignedHeaders()})
             .map((res:Response) => res.json().sessions)
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     readParticipantSessions():Observable<Session[]> {
         return this.http
-            .get(this.urlService.getURL(`user/${this.auth.getUserID()}/sessions/participating`))
+            .get(this.urlService.getURL(`user/${this.auth.getUserID()}/sessions/participating`),
+                {headers: this.urlService.getSignedHeaders()})
             .map((res:Response) => res.json().sessions)
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     readThemeSessions(id:string):Observable<Session[]> {
         return this.http
-            .get(this.urlService.getURL(`theme/${id}/sessions`))
+            .get(this.urlService.getURL(`theme/${id}/sessions`),
+                {headers: this.urlService.getSignedHeaders()})
             .map((res:Response) => res.json().sessions)
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     readInvitedSessions():Observable<Session[]> {
         return this.http
-            .get(this.urlService.getURL(`user/${this.auth.getUserID()}/sessions/invited`))
+            .get(this.urlService.getURL(`user/${this.auth.getUserID()}/sessions/invited`),
+                {headers: this.urlService.getSignedHeaders()})
             .map((res:Response) => res.json().sessions)
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -83,7 +88,7 @@ export class SessionProvider {
         return this.http.put(
             this.urlService.getURL(`session/${session._id}/accept`),
             JSON.stringify({userId: this.auth.getUserID()}),
-            {headers: this.urlService.getHeaders()}
+            {headers: this.urlService.getSignedHeaders()}
         )
             .map((res:Response) => res.json())
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
@@ -94,7 +99,7 @@ export class SessionProvider {
         return this.http.put(
             this.urlService.getURL(`session/${sessionId}/turn`),
             JSON.stringify({userId: userId, cardId: cardId}),
-            {headers: this.urlService.getHeaders()})
+            {headers: this.urlService.getSignedHeaders()})
             .map((res:Response) => res.json())
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -104,7 +109,7 @@ export class SessionProvider {
         return this.http.put(
             this.urlService.getURL(`session/${sessionId}/pick`),
             JSON.stringify({userId: userId, cards: cards}),
-            {headers: this.urlService.getHeaders()})
+            {headers: this.urlService.getSignedHeaders()})
             .map((res:Response) => res.json())
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }

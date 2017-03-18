@@ -3,7 +3,6 @@ import {NavController, NavParams} from 'ionic-angular';
 import {Session} from "../../../models/session";
 import {SessionProvider} from "../../../providers/session-provider";
 import {AuthService} from "../../../providers/auth-service";
-import { GameData } from '../../../providers/game-data';
 
 /*
  Generated class for the Game page.
@@ -31,7 +30,6 @@ export class GamePage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad GamePage');
-        this.startGame();
     }
 
     voteOnCard(cardId?) {
@@ -74,13 +72,5 @@ export class GamePage {
     
     isPriorityMaxed(priority){
         return this.session.amountOfCircles <= priority;
-    }
-
-    startGame(){
-        if(!this.isCurrentUsersTurn())return;
-    }
-
-    endGame(){
-        //this.voteOnCard();
     }
 }

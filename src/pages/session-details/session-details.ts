@@ -7,6 +7,7 @@ import { SessionChatPage } from './session-chat/session-chat';
 import {Session} from "../../models/session";
 import {SessionInformationPage} from "./session-information/session-information";
 import {SessionProvider} from "../../providers/session-provider";
+import {SessionCardsSelectPage} from "./session-cards-select/session-cards-select";
 
 /*
  Generated class for the SessionDetails page.
@@ -20,13 +21,13 @@ import {SessionProvider} from "../../providers/session-provider";
 })
 export class SessionDetailsPage {
     gameRoot:any = GamePage;
-    cardsRoot:any = SessionCardsPage;
+    cardsRoot:any = SessionCardsSelectPage;
     playersRoot:any = PlayersPage;
     chatRoot:any = SessionChatPage;
     informationRoot:any = SessionInformationPage;
 
     public session = new Session;
-    constructor(public navCtrl:NavController, public navParams:NavParams, public sessionProvider:SessionProvider) {
+    constructor(public navCtrl:NavController, public navParams:NavParams) {
         this.session = this.navParams.data;
     }
 

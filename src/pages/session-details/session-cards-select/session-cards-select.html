@@ -6,13 +6,19 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>session-cards-select</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>session-cards-select</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <ion-item *ngFor="let cardAdd of cards">
+        <ion-toggle [(ngModel)]="cardAdd.add"></ion-toggle>
+        <ion-label> {{cardAdd.card.description}}</ion-label>
+    </ion-item>
+
+    <button ion-button class="submit-btn" full (click)="safePickedCards()">Save changes</button>
 
 </ion-content>

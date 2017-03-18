@@ -47,6 +47,7 @@ export class AuthService {
                 {headers:this.urlService.getSignedHeaders()})
             .map((response:Response) => {
                 let userData = response.json().user;
+                this._currentUserData = userData;
             }).subscribe();  
         if (response.status == 200)
             return response;
@@ -58,6 +59,7 @@ export class AuthService {
     }
 
     public getUserInfo():User {
+        console.log(this._currentUserData);
         return this._currentUserData;
     }
 

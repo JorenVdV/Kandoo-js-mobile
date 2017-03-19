@@ -31,6 +31,7 @@ export class GamePage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad GamePage');
+        console.log(this.session.cardPriorities)
     }
 
     voteOnCard(cardId?) {
@@ -73,5 +74,9 @@ export class GamePage {
     
     isPriorityMaxed(priority){
         return this.session.amountOfCircles <= priority;
+    }
+
+    getHeaderColor(){
+        return this.isCurrentUsersTurn()?"secondary":"danger";
     }
 }

@@ -39,6 +39,14 @@
             <p>{{creator.firstname}} {{creator.lastname}}</p>
         </ion-item>
 
+        <button *ngIf="session.status === 'created' && isCurrentUserOrganiser()"
+                (click)="startSession()"
+                color="secondary"
+                ion-button
+                class="submit-btn"
+                full
+                type="submit">Start Session</button>
+
 <!--        <ion-item>
             <h2>Next voter</h2>
             <p>{{nextVoter.firstname}} {{nextVoter.lastname}}</p>

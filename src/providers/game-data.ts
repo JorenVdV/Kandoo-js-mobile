@@ -22,7 +22,7 @@ export class GameData {
   private _circleCardRef: any;
   private _circleCards$: any;
 
-  private _nextPlayerID: string;
+  private _nextPlayerID: any;
   private _circleTurnRef: any;
   private _circleTurn$: any;
 
@@ -31,7 +31,7 @@ export class GameData {
     private url: URLService) {
   }
    
-  setup(sessionID:string, nextPlayerID:string){
+  setup(sessionID:string, nextPlayerID:any){
 
     //handle card updates
     this._circleCardRef = firebase.database().ref(`circleCard/${sessionID}/turns`);
@@ -70,21 +70,21 @@ export class GameData {
   }
 
 
-  playturn(cardID:string){
+  playturn(cardId:string){
     this.http.put(
         this.url.getURL(`session/${this._sessionID}/turn`),
-        JSON.stringify({userID:this.auth.getUserID(),cardID:cardID}),
+        JSON.stringify({userId:this.auth.getUserID(),cardId:cardId}),
         {headers: this.url.getHeaders()}
       )
       .map((res:Response) => res.json())
       .catch((error:any) =>  Observable.throw(error.json().error || 'Server error'))
       .subscribe();
 
-    return this._circleCardRef.push({userID:this.auth.getUserID(),cardID:cardID}).key;
+    return this._circleCardRef.push({userId:this.auth.getUserID(),cardId:cardId}).key;
   }
 
   nextUser(){
-    return this._circleTurnRef.push({userID:this._nextPlayerID}).key;
+    return this._circleTurnRef.push({userId:this._nextPlayerID}).key;
   }
 
 }

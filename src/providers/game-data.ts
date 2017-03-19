@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {Headers, Http, Response, RequestOptions} from '@angular/http';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/map';
@@ -11,11 +11,11 @@ import firebase from 'firebase';
 import {SessionProvider} from "./session-provider";
 
 /*
- Generated class for the GameData provider.
+  Generated class for the GameData provider.
 
- See https://angular.io/docs/ts/latest/guide/dependency-injection.html
- for more info on providers and Angular 2 DI.
- */
+  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
+  for more info on providers and Angular 2 DI.
+*/
 @Injectable()
 export class GameData {
     private _sessionID:string;

@@ -46,7 +46,7 @@ export class SessionCardsSelectPage {
                 .filter(c=>c.add)
                 .map(c=>c.card._id))
             .subscribe(
-                data => console.log(data),
+                data => {},
                 err => console.error(err)
         );
     }

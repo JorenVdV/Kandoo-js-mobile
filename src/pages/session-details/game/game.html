@@ -19,10 +19,10 @@
             {{getGameInfo()}}
         </ion-label>
     </ion-list-header>
-    <ion-list padding>
+    <ion-list padding *ngIf="this.session.status !== 'created'">
         <ion-item *ngFor="let card of session.cardPriorities.sort(comp)" color="{{getCardColorCode(card.priority)}}">
             <ion-badge>
-                {{getVotes(card.card._id)}}
+                {{card.priority}}
             </ion-badge>
             {{card.card.description}}
             <ion-badge item-right *ngIf="isPriorityMaxed(card.priority)" color="danger">MAXED</ion-badge>

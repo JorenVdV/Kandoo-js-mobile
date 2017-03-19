@@ -23,7 +23,7 @@ export class GameData {
     private _circleCardRef:any;
     private _circleCards$:any;
 
-    private _nextPlayerID:string;
+    private _nextPlayer:any;
     private _circleTurnRef:any;
     private _circleTurn$:any;
 
@@ -33,7 +33,7 @@ export class GameData {
                 private url:URLService) {
     }
 
-    setup(sessionID:string, nextPlayerID:string) {
+    setup(sessionID:string, nextPlayer:any) {
 
         this._sessionID = sessionID;
 
@@ -43,7 +43,7 @@ export class GameData {
         this._circleCards$ = new ReplaySubject();
 
         // handle change of turns
-        this._nextPlayerID = nextPlayerID;
+        this._nextPlayer = nextPlayer;
         this._circleTurnRef = firebase.database().ref(`circleCard/${sessionID}/current`);
         this._circleTurnRef.on('child_added', this.handleTurnUpdate, this);
         this._circleTurn$ = new ReplaySubject();
@@ -75,26 +75,16 @@ export class GameData {
 
 
     playturn(cardID:string) {
-/*
-        console.log(this._sessionID)
-        this.http.put(
-            this.url.getURL(`session/${this._sessionID}/turn`),
-            JSON.stringify({userID: this.auth.getUserID(), cardID: cardID}),
-            {headers: this.url.getSignedHeaders()}
-        )
-            .map((res:Response) => res.json())
-            .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
-            .subscribe();
-*/
         this.sessionProvider.playTurn(this._sessionID, cardID).subscribe(
-            data => console.log(data),
+            data => {
+                return this._circleCardRef.push({user: this.auth.getUserInfo(), nextUser: data.currentUser, cardID: cardID, time: new Date().getTime()}).key;
+            },
             err => console.error(err)
         );
-        return this._circleCardRef.push({userID: this.auth.getUserID(), cardID: cardID, time: new Date()}).key;
     }
 
     nextUser() {
-        return this._circleTurnRef.push({userID: this._nextPlayerID}).key;
+        return this._circleTurnRef.push({user: this._nextPlayer}).key;
     }
 
 }

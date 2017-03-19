@@ -18,9 +18,6 @@ import { InvitedSessionListPage } from '../pages/overview/invited-session-list/i
 import { SessionDetailsPage } from '../pages/session-details/session-details';
 import { SessionChatPage } from '../pages/session-details/session-chat/session-chat';
 import { GamePage } from '../pages/session-details/game/game';
-import { PlayersPage } from '../pages/session-details/session-players/session-players';
-
-import { SessionCardsPage } from '../pages/session-details/session-cards/session-cards';
 import { SessionCardsSelectPage } from '../pages/session-details/session-cards-select/session-cards-select';
 import { SessionInformationPage } from '../pages/session-details/session-information/session-information';
 import { ThemeDetailsPage } from '../pages/theme-details/theme-details';
@@ -49,7 +46,6 @@ import { GameData } from '../providers/game-data';
     OverviewPage,
     SessionDetailsPage,
     GamePage,
-    PlayersPage,
     SessionInformationPage,
     SessionListPage,
     ThemeListPage,
@@ -58,7 +54,6 @@ import { GameData } from '../providers/game-data';
     ThemeDetailsInfoPage,
     ThemeDetailsSessionsPage,
     InvitedSessionDetailsPage,
-    SessionCardsPage,
     SessionCardsSelectPage,
     SessionChatPage
   ],
@@ -77,7 +72,6 @@ import { GameData } from '../providers/game-data';
     OverviewPage,
     SessionDetailsPage,
     GamePage,
-    PlayersPage,
     SessionInformationPage,
     SessionListPage,
     ThemeListPage,
@@ -86,7 +80,6 @@ import { GameData } from '../providers/game-data';
     ThemeDetailsInfoPage,
     ThemeDetailsSessionsPage,
     InvitedSessionDetailsPage,
-    SessionCardsPage,
     SessionCardsSelectPage,
     SessionChatPage
   ],

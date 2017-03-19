@@ -84,7 +84,7 @@ export class GamePage {
     }
 
     isPriorityMaxed(priority) {
-        return this.session.amountOfCircles <= priority;
+        return this.session.amountOfCircles <= priority-1;
     }
 
     getHeaderColor() {

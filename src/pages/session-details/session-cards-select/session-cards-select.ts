@@ -28,14 +28,12 @@ export class SessionCardsSelectPage {
         this.sessionId = navParams.data.sessionId;
         this.cards = [];
         navParams.data.sessionCards.forEach((card)=> {
+            let pickedCardsOfUser = navParams.data.pickedCards.find(pc => pc.userId === this.auth.getUserID());
             this.cards.push({
                 card: card,
-                add: navParams.data.pickedCards
-                        .find(pc => pc.userId === this.auth.getUserID())
-                        .cards.includes(card._id)
+                add: pickedCardsOfUser?pickedCardsOfUser.cards.includes(card._id):false
             })
         });
-
     }
 
     ionViewDidLoad() {

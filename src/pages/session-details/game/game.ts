@@ -17,6 +17,7 @@ import {GameData} from "../../../providers/game-data";
 })
 export class GamePage {
     private session = new Session;
+    private votes : {cardId:string, userId: string, time: Date}[];
 
     constructor(
         public navCtrl:NavController,
@@ -25,25 +26,24 @@ export class GamePage {
         private auth:AuthService,
         private gamedata:GameData        
         ) {
-
+        this.votes = [];
         this.session = this.navParams.data;
+        this.gamedata.setup(this.session._id, this.session.currentUser._id);
+        this.gamedata.circleCards.subscribe(
+            data => {
+                this.votes.push({cardId:data.cardID, userId:data.userID, time:data.time});
+            },
+            error => console.log(error)
+        );
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad GamePage');
-        console.log(this.session.cardPriorities)
     }
 
     voteOnCard(cardId?) {
         if (!this.isCurrentUsersTurn()) return;
-        this.sessionProvider.playTurn(this.session._id, cardId).subscribe(
-            data => {
-                console.log(data)
-                this.session.cardPriorities = data.cardPriorities;
-                this.session.currentUser = data.currentUser;
-            },
-            err => console.error(err)
-        );
+        this.gamedata.playturn(cardId);
     }
     
     canCurrentUserPlay(){
@@ -78,5 +78,13 @@ export class GamePage {
 
     getHeaderColor(){
         return this.isCurrentUsersTurn()?"secondary":"danger";
+    }
+
+    getVotes(cardId){
+        //todo
+        console.log(this.votes)
+        console.log(cardId)
+        console.log(this.votes.filter(v=> v.cardId === cardId));
+        return this.votes.filter(v=> v.cardId === cardId).length;
     }
 }

@@ -113,4 +113,14 @@ export class SessionProvider {
             .map((res:Response) => res.json())
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
+
+    public startSession(sessionId) {
+        let userId = this.auth.getUserID();
+        return this.http.put(
+            this.urlService.getURL(`session/${sessionId}/start`),
+            JSON.stringify({userId: userId}),
+            {headers: this.urlService.getSignedHeaders()})
+            .map((res:Response) => res.json())
+            .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+    }
 }

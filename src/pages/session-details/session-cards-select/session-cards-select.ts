@@ -3,6 +3,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import {Card} from "../../../models/card";
 import {AuthService} from "../../../providers/auth-service";
 import {SessionProvider} from "../../../providers/session-provider";
+import {Session} from "../../../models/session";
 
 /*
  Generated class for the SessionCardsSelect page.
@@ -15,6 +16,7 @@ import {SessionProvider} from "../../../providers/session-provider";
     templateUrl: 'session-cards-select.html'
 })
 export class SessionCardsSelectPage {
+    private session: Session;
     private cards:{card:Card, add:boolean}[];
     private sessionId: string;
 
@@ -22,6 +24,7 @@ export class SessionCardsSelectPage {
                 public navParams:NavParams,
                 public sessionProvider:SessionProvider,
                 public auth:AuthService) {
+        this.session = navParams.data.session;
         this.sessionId = navParams.data.sessionId;
         this.cards = [];
         navParams.data.sessionCards.forEach((card)=> {

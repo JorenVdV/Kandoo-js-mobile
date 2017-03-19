@@ -3,6 +3,7 @@
  */
 import {Card} from "./card";
 import {User} from "./user";
+import {Theme} from "./theme";
 
 export class Session {
     title: string;
@@ -28,5 +29,6 @@ export class Session {
     cardPriorities: Card[];
     currentUser: User;
     status: string;
+    theme: {organisers:string};
 }
 

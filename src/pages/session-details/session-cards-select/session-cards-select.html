@@ -16,7 +16,8 @@
 <ion-content padding>
     <ion-item *ngFor="let cardAdd of cards">
         <ion-toggle [(ngModel)]="cardAdd.add"
-                    (ionChange)="savePickedCards()"></ion-toggle>
+                    (ionChange)="savePickedCards()"
+                    disabled="session.status !== created"></ion-toggle>
         <ion-label> {{cardAdd.card.description}}</ion-label>
     </ion-item>
 </ion-content>

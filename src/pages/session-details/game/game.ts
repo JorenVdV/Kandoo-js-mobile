@@ -56,6 +56,7 @@ export class GamePage {
     voteOnCard(cardId) {
         if (!this.isCurrentUsersTurn()) return;
         this.gamedata.playturn(cardId);
+        this.gamedata.nextUser();
     }
 
     canCurrentUserPlay() {

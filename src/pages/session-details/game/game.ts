@@ -15,20 +15,22 @@ import {GameData} from "../../../providers/game-data";
 })
 export class GamePage {
     private session = new Session;
-    private votes:any;//{cardId:string, userId:string, time:any}[];
+    private votes: any;//{cardId:string, userId:string, time:any}[];
 
-    constructor(public navCtrl:NavController,
-                public navParams:NavParams,
-                private auth:AuthService,
-                private gamedata:GameData) {
+    constructor(public navCtrl: NavController,
+                public navParams: NavParams,
+                private auth: AuthService,
+                private gamedata: GameData) {
         this.votes = [];
         this.session = this.navParams.data;
         if (this.session.currentUser) {
-            this.gamedata.setup(this.session._id, this.session.currentUser);
+            let currUserIndex = this.session.participants.findIndex(user => user._id.toString() === this.auth.getUserID().toString());
+            let nextUserIndex = (currUserIndex < this.session.participants.length - 1) ? currUserIndex + 1 : 0;
+            this.gamedata.setup(this.session._id, this.session.participants[nextUserIndex]._id);
             this.gamedata.circleCards.subscribe(
                 data => {
                     let dataParsed = {cardId: data.cardID, user: data.user, time: data.time};
-                    if(this.votes.find(v=> v.time === dataParsed.time)?false:true){//om een of andere reden werkt een include hier niet?!
+                    if (this.votes.find(v => v.time === dataParsed.time) ? false : true) {//om een of andere reden werkt een include hier niet?!
                         this.votes.push(dataParsed);
                         this.setPriority(data.cardID);
                         this.session.currentUser = data.nextUser;
@@ -36,13 +38,13 @@ export class GamePage {
                 },
                 error => console.error(error)
             );
-/*            this.gamedata.circleTurn.subscribe(
+            this.gamedata.circleTurn.subscribe(
                 data => {
-                    console.log(data)
-                    this.session.currentUser = data;
+                    let currUserIndex = this.session.participants.findIndex(user => user._id == data.userID);
+                    this.session.currentUser = this.session.participants[currUserIndex];
                 },
                 error => console.error(error)
-            );*/
+            );
         }
     }
 
@@ -84,7 +86,7 @@ export class GamePage {
     }
 
     isPriorityMaxed(priority) {
-        return this.session.amountOfCircles <= priority-1;
+        return this.session.amountOfCircles <= priority - 1;
     }
 
     getHeaderColor() {
@@ -93,12 +95,12 @@ export class GamePage {
     }
 
     private getVotesOfCard(cardId) {
-        return this.votes.filter(v=> v.cardId === cardId).length;
+        return this.votes.filter(v => v.cardId === cardId).length;
     }
 
     private setPriority(cardId) {
         //let test = this.session.cardPriorities.find(c=> c.card._id === cardId)
         //console.log(test)
-        this.session.cardPriorities.find(c=> c.card._id === cardId).priority = this.getVotesOfCard(cardId);
+        this.session.cardPriorities.find(c => c.card._id === cardId).priority = this.getVotesOfCard(cardId);
     }
 }

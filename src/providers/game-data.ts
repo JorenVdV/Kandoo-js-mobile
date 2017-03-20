@@ -84,7 +84,7 @@ export class GameData {
     }
 
     nextUser() {
-        return this._circleTurnRef.push({user: this._nextPlayer}).key;
+        return this._circleTurnRef.push({userID: this._nextPlayer}).key;
     }
 
 }

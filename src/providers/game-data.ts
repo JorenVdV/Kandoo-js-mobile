@@ -77,7 +77,9 @@ export class GameData {
     playturn(cardID:string) {
         this.sessionProvider.playTurn(this._sessionID, cardID).subscribe(
             data => {
-                return this._circleCardRef.push({user: this.auth.getUserInfo(), nextUser: data.currentUser, cardID: cardID, time: new Date().getTime()}).key;
+                // ,user: this.auth.getUserInfo(), nextUser: data.currentUser
+                // , time: new Date().getTime()
+                return this._circleCardRef.push({userID: this.auth.getUserID(), cardID: cardID , time: new Date().getTime()}).key;
             },
             err => console.error(err)
         );

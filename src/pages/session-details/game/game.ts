@@ -29,17 +29,30 @@ export class GamePage {
             this.gamedata.setup(this.session._id, this.session.participants[nextUserIndex]._id);
             this.gamedata.circleCards.subscribe(
                 data => {
-                    let dataParsed = {cardId: data.cardID, user: data.user, time: data.time};
-                    if (this.votes.find(v => v.time === dataParsed.time) ? false : true) {//om een of andere reden werkt een include hier niet?!
+                    console.log('circleCards - data received: ');
+                    console.log(data);
+                    console.log('current Time:');
+                    console.log(new Date());
+                    let dataParsed = {cardId: data.cardID, userId: data.userID, time: data.time};
+                    if (!this.votes.find(v => v.time === dataParsed.time)){
                         this.votes.push(dataParsed);
-                        this.setPriority(data.cardID);
-                        this.session.currentUser = data.nextUser;
+                        this.setPriority(dataParsed.cardId);
                     }
+                    // let dataParsed = {cardId: data.cardID, user: data.user, time: data.time};
+                    // if (this.votes.find(v => v.time === dataParsed.time) ? false : true) {//om een of andere reden werkt een include hier niet?!
+                    //     this.votes.push(dataParsed);
+                    //     this.setPriority(data.cardID);
+                    //     this.session.currentUser = data.nextUser;
+                    // }
                 },
                 error => console.error(error)
             );
             this.gamedata.circleTurn.subscribe(
                 data => {
+                    console.log('circleTurn - data received: ');
+                    console.log(data);
+                    console.log('current Time:');
+                    console.log(new Date());
                     let currUserIndex = this.session.participants.findIndex(user => user._id == data.userID);
                     this.session.currentUser = this.session.participants[currUserIndex];
                 },

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 
 import { Session } from '../../models/session';
 import { SessionProvider } from '../../providers/session-provider';
@@ -18,9 +18,10 @@ export class InvitedSessionDetailsPage {
   session:Session;
   constructor(public navCtrl: NavController, 
   public navParams: NavParams,
-  private sessionprov: SessionProvider) {
+  private sessionprov: SessionProvider,
+  public menuctrl: MenuController) {
     this.session = this.navParams.get('session');
-    // console.log(this.session);
+    this.menuctrl.swipeEnable(false);
   }
 
   ionViewDidLoad() {

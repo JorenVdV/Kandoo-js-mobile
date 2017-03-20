@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 import {AccountDetailsPage} from "../account-details/account-details";
 import {AuthService} from "../../providers/auth-service";
 import {LoginPage} from "../login/login";
@@ -19,7 +19,11 @@ export class ChangeAccountPasswordPage {
   oldPassword:string;
   newPassword:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth:AuthService) {
+  constructor(public navCtrl: NavController, 
+  public navParams: NavParams, 
+  private auth:AuthService,
+  public menuctrl: MenuController) {
+    this.menuctrl.swipeEnable(false);
     if (!this.auth.LoggedIn()){
       this.navCtrl.setRoot(LoginPage);
     }

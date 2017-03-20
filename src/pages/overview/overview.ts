@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 
 import { AccountDetailsPage } from '../account-details/account-details';
 import { SessionListPage } from './session-list/session-list';
@@ -21,7 +21,11 @@ export class OverviewPage {
   tab2Root: any = SessionListPage;
   tab3Root: any = InvitedSessionListPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public menuctrl: MenuController) {
+      this.menuctrl.swipeEnable(false);
+    }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad OverviewPage');

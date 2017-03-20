@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController, Loading } from 'ionic-angular';
+import { NavController, AlertController, LoadingController, Loading, MenuController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 // import { SocketService } from '../../providers/socket-service';
 
@@ -26,8 +26,9 @@ export class LoginPage {
     private auth: AuthService, 
     private alertCtrl: AlertController, 
     private loadingCtrl: LoadingController,
-    // private socketService: SocketService
+    public menuctrl: MenuController
     ) {
+      this.menuctrl.swipeEnable(false);
       if(this.auth.LoggedIn()){
         this.nav.setRoot(OverviewPage);
       }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, MenuController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 
 /*
@@ -24,8 +24,9 @@ export class RegisterPage {
 
   constructor(private nav: NavController, 
     private authService: AuthService, 
-    private alertCtrl: AlertController) {
-
+    private alertCtrl: AlertController,
+    public menuctrl: MenuController) {
+      this.menuctrl.swipeEnable(false);
     }
 
 

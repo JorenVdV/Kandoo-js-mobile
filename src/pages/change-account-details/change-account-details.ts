@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, MenuController} from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service";
 import {LoginPage} from "../login/login";
 import {HomePage} from "../home/home";
@@ -19,7 +19,11 @@ import {User} from "../../models/user";
 export class ChangeAccountDetailsPage {
     private user = new User;
     
-    constructor(public navCtrl:NavController, public navParams:NavParams, private auth:AuthService) {
+    constructor(public navCtrl:NavController,
+    public navParams:NavParams, 
+    private auth:AuthService,
+    public menuctrl: MenuController) {
+        this.menuctrl.swipeEnable(false);
         if (!this.auth.LoggedIn()) {
             this.navCtrl.setRoot(LoginPage);
         }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, App } from 'ionic-angular';
+import { NavController, NavParams, App, MenuController } from 'ionic-angular';
 
 import { ThemeDetailsInfoPage } from './theme-details-info/theme-details-info';
 import { ThemeDetailsSessionsPage } from './theme-details-sessions/theme-details-sessions';
@@ -23,7 +23,9 @@ export class ThemeDetailsPage {
   theme:Theme;
   constructor(public navCtrl: NavController,
    public navParams: NavParams,
-   private app:App) {
+   private app:App,
+   public menuctrl: MenuController) {
+     this.menuctrl.swipeEnable(false);
      this.theme = this.navParams.get('theme');
    }
 

@@ -23,7 +23,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform, ) {
     this.initializeApp();
 
     // Setup firebase
@@ -38,11 +38,11 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Overview', component:  OverviewPage},
-      { title: 'Login', component: LoginPage },
-      { title: 'Account', component: ChangeAccountDetailsPage},
-      { title: 'AccountDetails', component: AccountDetailsPage},
-      { title: 'SessionDetails', component: SessionDetailsPage}
+      // { title: 'Overview', component:  OverviewPage},
+      // { title: 'Login', component: LoginPage },
+      // { title: 'Account', component: ChangeAccountDetailsPage},
+      // { title: 'AccountDetails', component: AccountDetailsPage},
+      // { title: 'SessionDetails', component: SessionDetailsPage}
       //{ title: 'Register', component: RegisterPage }
     ];
 
@@ -52,6 +52,7 @@ export class MyApp {
     this.platform.ready().then(() => {
       StatusBar.styleDefault();
       Splashscreen.hide();
+      
     });
   }
 

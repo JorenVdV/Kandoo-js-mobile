@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { LoginPage } from '../login/login';
 import { RegisterPage } from '../register/register';
@@ -14,7 +14,9 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    public auth: AuthService) {
+    public auth: AuthService,
+    public menuctrl: MenuController) {
+      this.menuctrl.swipeEnable(false);
   }
 
   private login(){

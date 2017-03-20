@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, MenuController} from 'ionic-angular';
 import {GamePage} from "./game/game";
 import { SessionChatPage } from './session-chat/session-chat';
 import {Session} from "../../models/session";
@@ -24,7 +24,10 @@ export class SessionDetailsPage {
     informationRoot:any = SessionInformationPage;
 
     public session = new Session;
-    constructor(public navCtrl:NavController, public navParams:NavParams) {
+    constructor(public navCtrl:NavController, 
+        public navParams:NavParams,
+        public menuctrl: MenuController) {
+        this.menuctrl.swipeEnable(false);
         this.session = this.navParams.data;
     }
 

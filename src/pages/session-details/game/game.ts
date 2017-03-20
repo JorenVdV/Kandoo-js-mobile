@@ -1,10 +1,8 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {Session} from "../../../models/session";
-import {SessionProvider} from "../../../providers/session-provider";
 import {AuthService} from "../../../providers/auth-service";
 import {GameData} from "../../../providers/game-data";
-
 /*
  Generated class for the Game page.
 
@@ -17,36 +15,48 @@ import {GameData} from "../../../providers/game-data";
 })
 export class GamePage {
     private session = new Session;
+    private votes:any;//{cardId:string, userId:string, time:any}[];
 
-    constructor(
-        public navCtrl:NavController,
-        public navParams:NavParams,
-        private sessionProvider:SessionProvider,
-        private auth:AuthService,
-        private gamedata:GameData        
-        ) {
-
+    constructor(public navCtrl:NavController,
+                public navParams:NavParams,
+                private auth:AuthService,
+                private gamedata:GameData) {
+        this.votes = [];
         this.session = this.navParams.data;
+        if (this.session.currentUser) {
+            this.gamedata.setup(this.session._id, this.session.currentUser);
+            this.gamedata.circleCards.subscribe(
+                data => {
+                    let dataParsed = {cardId: data.cardID, user: data.user, time: data.time};
+                    if(this.votes.find(v=> v.time === dataParsed.time)?false:true){//om een of andere reden werkt een include hier niet?!
+                        this.votes.push(dataParsed);
+                        this.setPriority(data.cardID);
+                        this.session.currentUser = data.nextUser;
+                    }
+                },
+                error => console.error(error)
+            );
+/*            this.gamedata.circleTurn.subscribe(
+                data => {
+                    console.log(data)
+                    this.session.currentUser = data;
+                },
+                error => console.error(error)
+            );*/
+        }
     }
+
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad GamePage');
-        console.log(this.session.cardPriorities)
     }
 
-    voteOnCard(cardId?) {
+    voteOnCard(cardId) {
         if (!this.isCurrentUsersTurn()) return;
-        this.sessionProvider.playTurn(this.session._id, cardId).subscribe(
-            data => {
-                console.log(data)
-                this.session.cardPriorities = data.cardPriorities;
-                this.session.currentUser = data.currentUser;
-            },
-            err => console.error(err)
-        );
+        this.gamedata.playturn(cardId);
     }
-    
-    canCurrentUserPlay(){
+
+    canCurrentUserPlay() {
         return this.session.status === 'started' && this.isCurrentUsersTurn();
     }
 
@@ -55,6 +65,7 @@ export class GamePage {
     }
 
     public getGameInfo() {
+        if (this.session.status === 'created') return 'The session is not started yet.';
         if (this.isCurrentUsersTurn()) {
             return 'It is your turn';
         }
@@ -69,14 +80,25 @@ export class GamePage {
     }
 
     getCardColorCode(priority) {
-        return (this.session.circleType === 'threat'?'red':'blue')+priority;
-    }
-    
-    isPriorityMaxed(priority){
-        return this.session.amountOfCircles <= priority;
+        return (this.session.circleType === 'threat' ? 'red' : 'blue') + priority;
     }
 
-    getHeaderColor(){
-        return this.isCurrentUsersTurn()?"secondary":"danger";
+    isPriorityMaxed(priority) {
+        return this.session.amountOfCircles <= priority-1;
+    }
+
+    getHeaderColor() {
+        if (this.session.status === 'created') return 'primary';
+        return this.isCurrentUsersTurn() ? "secondary" : "danger";
+    }
+
+    private getVotesOfCard(cardId) {
+        return this.votes.filter(v=> v.cardId === cardId).length;
+    }
+
+    private setPriority(cardId) {
+        //let test = this.session.cardPriorities.find(c=> c.card._id === cardId)
+        //console.log(test)
+        this.session.cardPriorities.find(c=> c.card._id === cardId).priority = this.getVotesOfCard(cardId);
     }
 }

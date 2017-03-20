@@ -17,7 +17,7 @@
     <ion-item *ngFor="let cardAdd of cards">
         <ion-toggle [(ngModel)]="cardAdd.add"
                     (ionChange)="savePickedCards()"
-                    disabled="session.status !== created"></ion-toggle>
+                    disabled="{{session.status !== 'created'}}"></ion-toggle>
         <ion-label> {{cardAdd.card.description}}</ion-label>
     </ion-item>
 </ion-content>
